@@ -29,7 +29,8 @@ public class LijnStuk extends Vorm {
 			return true;
 		} else {
 			LijnStuk s = (LijnStuk) o;
-			return (this.start == s.eind && this.start == s.eind);
+			if (this.start == s.start && this.eind == s.eind);
+			return true;
 		}		
 	}
 	@Override

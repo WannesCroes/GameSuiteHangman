@@ -3,6 +3,7 @@ package ui;
 import javax.swing.JOptionPane;
 
 import domain.Cirkel;
+import domain.LijnStuk;
 import domain.Punt;
 import domain.Rechthoek;
 import domain.Speler;
@@ -37,6 +38,17 @@ public class Launcher {
 			Rechthoek rechthoek = new Rechthoek(punt, breedte, hoogte);
 			
 			JOptionPane.showMessageDialog(null, "U heeft een correcte rechthoek aangemaakt: " + rechthoek.toString(), speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(keuze.equals("LijnStuk")){
+			int xStart = Integer.parseInt(JOptionPane.showInputDialog("x coordinaat van het Startpunt:"));
+			int yStart = Integer.parseInt(JOptionPane.showInputDialog("y coordinaat van het Startpunt:"));
+			int xEind = Integer.parseInt(JOptionPane.showInputDialog("x coordinaat van het Eindpunt:"));
+			int yEind = Integer.parseInt(JOptionPane.showInputDialog("y coordinaat van het Eindpunt:"));
+			Punt startPunt = new Punt(xStart, yStart);
+			Punt eindPunt = new Punt(xEind, yEind);
+			LijnStuk lijnStuk = new LijnStuk(startPunt, eindPunt);
+			
+			JOptionPane.showMessageDialog(null, "U heeft een correct Lijnstuk aangemaakt: " + lijnStuk.toString());
 		}
 	}
 
