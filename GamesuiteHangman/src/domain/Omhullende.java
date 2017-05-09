@@ -57,6 +57,8 @@ public class Omhullende {
 	public int getMaximaleY(){
 		return this.getLinkerBoven().getY() + this.getHoogte();
 	}
+	
+	@Override
 	public boolean equals(Object object){
 		if(object == null){
 			return false;
@@ -72,6 +74,7 @@ public class Omhullende {
 		return false;
 	}
 	
+	@Override
 	public String toString(){
 		return "Omhullende: " + this.getLinkerBoven() + " - "  + this.getBreedte() + " - " + this.getHoogte();
 	}
