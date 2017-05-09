@@ -64,4 +64,8 @@ public class Driehoek extends Vorm{
 		}
 		return false;
 	}
+	@Override
+	public String toString(){
+		return "Driehoek: hoekpunt1: " + this.getHoekPunt1().toString() + " - hoekpunt2: " + this.getHoekPunt2().toString() + " - hoekpunt3: " + this.getHoekPunt3().toString();
+	}
 }
