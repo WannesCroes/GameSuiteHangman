@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import domain.Cirkel;
 import domain.DomainException;
+import domain.LijnStuk;
 import domain.Punt;
 import domain.Rechthoek;
 import domain.Speler;
@@ -18,25 +19,36 @@ public class Launcher {
 			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
 					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 
-			String[] shapes = { "Cirkel", "Rechthoek" };
+			String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk" };
 			String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
 
-			Punt punt = createPunt();
-
-			JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(),
-					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-
 			if (keuze.equals("Cirkel")) {
+				Punt punt = createPunt("middelpunt");
+
+				JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(),
+						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+				
 				Cirkel cirkel = createCirkel(punt);
 
 				JOptionPane.showMessageDialog(null, "U heeft een correcte cirkel aangemaakt: " + cirkel.toString(),
 						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+				
 			} else if (keuze.equals("Rechthoek")) {
+				Punt punt = createPunt("linkerbovenhoekpunt");
+
+				JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(),
+						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+				
 				Rechthoek rechthoek = createRechthoek(punt);
 
 				JOptionPane.showMessageDialog(null,
 						"U heeft een correcte rechthoek aangemaakt: " + rechthoek.toString(), speler.getNaam(),
 						JOptionPane.INFORMATION_MESSAGE);
+				
+			} else if (keuze.equals("LijnStuk")) {
+				LijnStuk lijnstuk = createLijnstuk();
+				
+				JOptionPane.showMessageDialog(null, "U heeft een correct Lijnstuk aangemaakt: " + lijnstuk.toString());
 			}
 		} catch (CancelledException e) {
 			return;
@@ -75,18 +87,18 @@ public class Launcher {
 		return speler;
 	}
 	
-	private static Punt createPunt() throws CancelledException {
+	private static Punt createPunt(String soort) throws CancelledException {
 		Punt punt;
 		try {
-			int x = Integer.parseInt(showJOptionInputDialog("x coordinaat van het punt:", "input"));
-			int y = Integer.parseInt(showJOptionInputDialog("y coordinaat van het punt:", "input"));
+			int x = Integer.parseInt(showJOptionInputDialog("x coordinaat van het punt:", soort));
+			int y = Integer.parseInt(showJOptionInputDialog("y coordinaat van het punt:", soort));
 			punt = new Punt(x, y);
 		} catch (DomainException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
-			punt = createPunt();
+			punt = createPunt(soort);
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "het punt moet geldige coordinaten hebben");
-			punt = createPunt();
+			punt = createPunt(soort);
 		}
 		return punt;
 	}
@@ -120,5 +132,18 @@ public class Launcher {
 			cirkel = createCirkel(punt);
 		}
 		return cirkel;
+	}
+	
+	private static LijnStuk createLijnstuk() throws CancelledException {
+		LijnStuk lijnStuk;
+		try {
+			Punt startPunt = createPunt("startpunt (lijnstuk)");
+			Punt eindPunt = createPunt("eindpunt (lijnstuk)");
+			lijnStuk = new LijnStuk(startPunt, eindPunt);
+		} catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, "het begin en eindpunt mogen niet dezelfde zijn");
+			lijnStuk = createLijnstuk();
+		}
+		return lijnStuk;
 	}
 }
