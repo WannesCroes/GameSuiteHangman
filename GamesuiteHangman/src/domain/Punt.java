@@ -9,11 +9,17 @@ public class Punt {
 		this.setX(x);
 		this.setY(y);
 	}
-	public boolean equals(int x,int y){
-		if( x == y){
+	
+	@Override 
+	public boolean equals(Object o){
+		if(o == null || !(o instanceof Punt)){
+			return false;
+		} else if(o == this) {
 			return true;
+		} else {
+			Punt s = (Punt) o;
+			return (this.x== s.x && this.y == s.y);
 		}
-		return false;
 	}
 	
 	public int getX() {
@@ -31,6 +37,8 @@ public class Punt {
 	private void setY(int y) {
 		this.y = y;
 	}
+	
+	@Override
 	public String toString(){
 		String output = "(" + x + ", " + y + ")";
 		return output;
