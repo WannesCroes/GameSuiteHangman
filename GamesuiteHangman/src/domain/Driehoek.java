@@ -8,17 +8,23 @@ public class Driehoek extends Vorm{
 	private Punt punt3;
 	
 	public Driehoek(Punt punt1, Punt punt2, Punt punt3) {
-		
+		setHoekpunten(punt1,punt2,punt3);
 	}
 	
 	public void setHoekpunten(Punt punt1, Punt punt2, Punt punt3){
 		if(punt1 == null || punt2 == null || punt3 == null){
-			throw new IllegalArgumentException("Hoekpunten mogen niet nul zijn");
+			throw new DomainException("Hoekpunten mogen niet nul zijn");
 		}
-	
+		if(punt1.equals(punt2) || punt2.equals(punt3) || punt1.equals(punt3)){
+			throw new DomainException("2 punten mogen niet gelijk zijn aan elkaar");
+		}
+		
+		if( (punt2.getX() - punt1.getX()* punt3.getY() - punt1.getY()) == (punt3.getX() - punt1.getX() * punt2.getY() - punt1.getY())){
+			throw new DomainException("de 3 hoekpunten liggen op 1 lijn");
+		}
 		this.punt1 = punt1;
 		this.punt2 = punt2;
-		this.punt3 = punt2;
+		this.punt3 = punt3;
 	}
 	public Punt getHoekPunt1(){
 		return punt1;
