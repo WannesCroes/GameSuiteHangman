@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import domain.Cirkel;
 import domain.DomainException;
+import domain.Driehoek;
 import domain.LijnStuk;
 import domain.Punt;
 import domain.Rechthoek;
@@ -19,7 +20,7 @@ public class Launcher {
 			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
 					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 
-			String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk" };
+			String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk", "Driehoek" };
 			String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
 
 			if (keuze.equals("Cirkel")) {
@@ -49,6 +50,10 @@ public class Launcher {
 				LijnStuk lijnstuk = createLijnstuk();
 				
 				JOptionPane.showMessageDialog(null, "U heeft een correct Lijnstuk aangemaakt: " + lijnstuk.toString());
+			}else if (keuze.equals("Driehoek")){
+				Driehoek driehoek = createDriehoek();
+				JOptionPane.showMessageDialog(null, "U heeft een correcte Driehoek aangemaakt: " + driehoek.toString());
+
 			}
 		} catch (CancelledException e) {
 			return;
@@ -146,4 +151,21 @@ public class Launcher {
 		}
 		return lijnStuk;
 	}
+	private static Driehoek createDriehoek() throws CancelledException {
+		Driehoek driehoek;
+		try {
+			Punt punt1 = createPunt("punt 1");
+			Punt punt2 = createPunt("punt 2");
+			Punt punt3 = createPunt("punt 3");
+			driehoek = new Driehoek(punt1,punt2,punt3);
+		} catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			driehoek = createDriehoek();
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "de breedte/lengte moet een getal zijn");
+			driehoek = createDriehoek();
+		}
+		return driehoek;
+	}
+	
 }
