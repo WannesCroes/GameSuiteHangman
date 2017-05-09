@@ -3,41 +3,122 @@ package ui;
 import javax.swing.JOptionPane;
 
 import domain.Cirkel;
+import domain.DomainException;
 import domain.Punt;
 import domain.Rechthoek;
 import domain.Speler;
+import domain.exceptions.*;
 
 public class Launcher {
 
 	public static void main(String[] args) {
-		String naam = JOptionPane.showInputDialog("Welkom! \nHoe heet je?");
-		Speler speler = new Speler(naam);
+		try {
+			Speler speler = createSpeler();
 
-		JOptionPane.showMessageDialog(null, speler.getNaam() + " zal binnekort spelen", speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-		
-		JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(), speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-		
-		Object[] shapes = {"Cirkel", "Rechthoek"};
-		Object keuze = JOptionPane.showInputDialog(null, "Wat wilt u tekenen", "input", JOptionPane.INFORMATION_MESSAGE, null, shapes, null);
-		
-		int x = Integer.parseInt(JOptionPane.showInputDialog("x coordinaat van het punt:"));
-		int y = Integer.parseInt(JOptionPane.showInputDialog("y coordinaat van het punt:"));
-		Punt punt = new Punt(x,y);
-		
-		JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(), speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-		
-		if (keuze.equals("Cirkel")) {
-			int straal = Integer.parseInt(JOptionPane.showInputDialog("straal voor de cirkel:"));
-			Cirkel cirkel = new Cirkel(punt, straal);
-			
-			JOptionPane.showMessageDialog(null, "U heeft een correcte cirkel aangemaakt: " + cirkel.toString(), speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-		} else if (keuze.equals("Rechthoek")) {
-			int breedte = Integer.parseInt(JOptionPane.showInputDialog("Breedte van de rechthoek:"));
-			int hoogte = Integer.parseInt(JOptionPane.showInputDialog("Hoogte van de rechthoek:"));
-			Rechthoek rechthoek = new Rechthoek(punt, breedte, hoogte);
-			
-			JOptionPane.showMessageDialog(null, "U heeft een correcte rechthoek aangemaakt: " + rechthoek.toString(), speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
+					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+
+			String[] shapes = { "Cirkel", "Rechthoek" };
+			String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
+
+			Punt punt = createPunt();
+
+			JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(),
+					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+
+			if (keuze.equals("Cirkel")) {
+				Cirkel cirkel = createCirkel(punt);
+
+				JOptionPane.showMessageDialog(null, "U heeft een correcte cirkel aangemaakt: " + cirkel.toString(),
+						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
+			} else if (keuze.equals("Rechthoek")) {
+				Rechthoek rechthoek = createRechthoek(punt);
+
+				JOptionPane.showMessageDialog(null,
+						"U heeft een correcte rechthoek aangemaakt: " + rechthoek.toString(), speler.getNaam(),
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		} catch (CancelledException e) {
+			return;
 		}
 	}
+	
+	private static String showJOptionInputDialog(String message, String title) throws CancelledException {
+		String value = JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
 
+		if (value == null) {
+			throw new CancelledException("User pressed the cancel button");
+		} else {
+			return value;
+		}
+	}
+	
+	private static String showJOptionDropdownDialog(String message, String title, String [] list, String selectedItem) throws CancelledException {
+		String value = (String) JOptionPane.showInputDialog(null, message, title, JOptionPane.QUESTION_MESSAGE, null, list, selectedItem);
+		
+		if (value == null) {
+			throw new CancelledException("User pressed the cancel button");
+		} else {
+			return value;
+		}
+	}
+	
+	private static Speler createSpeler() throws CancelledException {
+		Speler speler;
+		try {
+			String naam = showJOptionInputDialog("Welkom! \nHoe heet je?", "Welkom");
+			speler = new Speler(naam);
+		} catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			speler = createSpeler();
+		}
+		return speler;
+	}
+	
+	private static Punt createPunt() throws CancelledException {
+		Punt punt;
+		try {
+			int x = Integer.parseInt(showJOptionInputDialog("x coordinaat van het punt:", "input"));
+			int y = Integer.parseInt(showJOptionInputDialog("y coordinaat van het punt:", "input"));
+			punt = new Punt(x, y);
+		} catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			punt = createPunt();
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "het punt moet geldige coordinaten hebben");
+			punt = createPunt();
+		}
+		return punt;
+	}
+	
+	private static Rechthoek createRechthoek(Punt punt) throws CancelledException {
+		Rechthoek rechthoek;
+		try {
+			int breedte = Integer.parseInt(showJOptionInputDialog("Breedte van de rechthoek:", "input"));
+			int hoogte = Integer.parseInt(showJOptionInputDialog("Hoogte van de rechthoek:", "input"));
+			rechthoek = new Rechthoek(punt, breedte, hoogte);
+		} catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			rechthoek = createRechthoek(punt);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "de breedte/lengte moet een getal zijn");
+			rechthoek = createRechthoek(punt);
+		}
+		return rechthoek;
+	}
+
+	private static Cirkel createCirkel(Punt punt) throws CancelledException {
+		Cirkel cirkel;
+		try {
+			int straal = Integer.parseInt(showJOptionInputDialog("straal voor de cirkel:", "input"));
+			cirkel = new Cirkel(punt, straal);
+		} catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			cirkel = createCirkel(punt);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "de straal moet een getal zijn");
+			cirkel = createCirkel(punt);
+		}
+		return cirkel;
+	}
 }
