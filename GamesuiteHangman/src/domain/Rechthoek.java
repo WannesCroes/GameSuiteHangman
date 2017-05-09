@@ -8,14 +8,14 @@ public class Rechthoek {
 	public Rechthoek(Punt linkerbovenhoek, int breedte, int hoogte) {
 		this.setBreedte(breedte);
 		this.setHoogte(hoogte);
-		this.setLinkerBovenHoek(linkerbovenhoek);
+		this.setLinkerBovenhoek(linkerbovenhoek);
 	}
 	
-	public Punt getLinkerBovenHoek() {
+	public Punt getLinkerBovenhoek() {
 		return this.linkerBovenHoek;
 	}
 	
-	public void setLinkerBovenHoek(Punt hoek) {
+	public void setLinkerBovenhoek(Punt hoek) {
 		if (hoek == null) {
 			throw new DomainException("Geef een geldig punt");
 		}
@@ -48,6 +48,27 @@ public class Rechthoek {
 	public String toString() {
 		return "Rechthoek: positie: (" + this.linkerBovenHoek.getX() + ", " + this.linkerBovenHoek.getY() + ") - breedte: "
 				+ this.getBreedte() + " - hoogte: " + this.getHoogte();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || !(obj instanceof Rechthoek)) {
+			return false;
+		}
+		Rechthoek other = (Rechthoek) obj;
+		if (breedte != other.breedte) {
+			return false;
+		}
+		if (hoogte != other.hoogte) {
+			return false;
+		}
+		if (!linkerBovenHoek.equals(other.linkerBovenHoek)) {
+			return false;
+		}
+		return true;
 	}
 	
 	
