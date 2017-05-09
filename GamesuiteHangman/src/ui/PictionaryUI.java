@@ -5,10 +5,14 @@ import javax.swing.JOptionPane;
 import domain.Speler;
 
 public class PictionaryUI {
+	Speler speler;
 	
+	public PictionaryUI(Speler speler){
+		this.speler = speler;
+	}
 	
-	int x = Integer.parseInt(JOptionPane.showInputDialog("x coordinaat van het punt:"));
-	int y = Integer.parseInt(JOptionPane.showInputDialog("y coordinaat van het punt:"));
-	
+	public void showMenu(){
+		
+	}
 	
 }
