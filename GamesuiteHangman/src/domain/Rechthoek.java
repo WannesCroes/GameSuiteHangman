@@ -43,6 +43,11 @@ public class Rechthoek extends Vorm {
 		}
 		this.hoogte = hoogte;
 	}
+	
+	public Omhullende getOmhullende(){
+		Omhullende omhullende = new Omhullende(linkerBovenHoek, breedte, hoogte);
+		return omhullende;
+	}
 
 	@Override
 	public String toString() {

@@ -22,7 +22,7 @@ public class OmhullendeTest {
 	@Test
 	public void Omhullende_moet_omhullende_aanmaken_met_gegeven_linkerbovenhoek_breedte_en_hoogte() {
 		Omhullende omhullende = new Omhullende(linkerBovenhoek,breedte, hoogte);
-		assertEquals(linkerBovenhoek, omhullende.getLinkerBovenhoek());
+		assertEquals(linkerBovenhoek, omhullende.getLinkerBoven());
 		assertEquals(hoogte, omhullende.getHoogte());
 		assertEquals(breedte, omhullende.getBreedte());
 	}
