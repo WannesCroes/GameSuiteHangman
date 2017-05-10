@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Random;
 
+import db.WoordenLezer;
 import domain.exceptions.DatabaseException;
 
 public class WoordenLijst {
