@@ -47,13 +47,16 @@ public class Cirkel extends Vorm {
 	}
 	
 	public String toString(){
-		return "Cirkel: Middelpunt: " + this.getMiddelpunt() + " - straal: " + this.getRadius();		
+		return "Cirkel: Middelpunt: " + this.getMiddelpunt() + " - straal: " + this.getRadius()+ "\n" + "Omhullende: " + this.getOmhullende().toString();		
 	}
 
 	@Override
 	public Omhullende getOmhullende() {
-		// TODO Auto-generated method stub
-		return null;
+		int breedte = this.radius * 2;
+		int hoogte = this.radius * 2;
+		Punt positieLinkerBoven = new Punt(this.middelpunt.getX() - this.radius, this.middelpunt.getY() - this.radius);
+		Omhullende omhullende = new Omhullende(positieLinkerBoven, breedte, hoogte);
+		return omhullende;
 	}
 	
 }
