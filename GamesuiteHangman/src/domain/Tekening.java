@@ -14,6 +14,9 @@ public class Tekening {
 		this.setNaam(naam);
 	}
 	public void voegToe(Vorm vorm){
+		if(vorm.getOmhullende().getMaximaleX() < MIN_X ){
+			throw new DomainException("Vorm valt buiten de tekening.");
+		}
 		vormen.add(vorm);
 	}
 	public String getNaam() {
