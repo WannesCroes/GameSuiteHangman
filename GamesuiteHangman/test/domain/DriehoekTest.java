@@ -65,5 +65,15 @@ public class DriehoekTest {
 		Driehoek drieHoek = new Driehoek(punt1, punt2, punt3);
 		assertFalse(drieHoek.equals(null));
 	}
+	@Test
+	public void getOmhullende_moet_juiste_waarde_geven(){
+		Punt punt1 = new Punt(100,200);
+		Punt punt2 = new Punt(300,200);
+		Punt punt3 = new Punt(200,100);
+		Punt Linksboven = new Punt(100,100);
+		Driehoek driehoek = new Driehoek(punt1,punt2,punt3);
+		Omhullende omhullende = new Omhullende(Linksboven, 200,100);
+		assertEquals(driehoek.getOmhullende(),omhullende );
+	}
 
 }

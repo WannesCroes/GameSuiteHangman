@@ -34,15 +34,27 @@ public class CirkelTest {
 	public void Middelpunt_is_null(){
 		Cirkel cirkelAnder = new Cirkel(null, radius);
 	}
+	@Test
 	public void equals_moet_false_Teruggeven_als_punt_niet_gelijk_is(){
 		Punt punt = new Punt(100,300);
 		Cirkel cirkelAnder= new Cirkel(punt, radius);
 		assertFalse(cirkel.equals(cirkelAnder));
 	}
+	@Test
 	public void equals_geeft_true_als_punt_gelijk_is(){
 		Cirkel cirkelAnder = new Cirkel(middelpunt, radius);
 		assertTrue(cirkel.equals(cirkelAnder));
 		
 			}
+	
+	@Test
+	public void getOmhullende_moet_juiste_waarde_geven(){
+		Punt middelpunt = new Punt(200,200);
+		int radius = 20;
+		Punt Linksboven = new Punt(180,180);
+		Cirkel cirkel = new Cirkel(middelpunt, radius);
+		Omhullende omhullende = new Omhullende(Linksboven, 40,40);
+		assertEquals(cirkel.getOmhullende(),omhullende );
+	}
 	
 }

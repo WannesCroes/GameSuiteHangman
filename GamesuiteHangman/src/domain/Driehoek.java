@@ -72,12 +72,21 @@ public class Driehoek extends Vorm{
 	}
 	@Override
 	public String toString(){
-		return "Driehoek: hoekpunt1: " + this.getHoekPunt1().toString() + " - hoekpunt2: " + this.getHoekPunt2().toString() + " - hoekpunt3: " + this.getHoekPunt3().toString();
+		return "Driehoek: hoekpunt1: " + this.getHoekPunt1().toString() + " - hoekpunt2: " + this.getHoekPunt2().toString() + " - hoekpunt3: " + this.getHoekPunt3().toString() + "\n" + "Omhullende: " + this.getOmhullende().toString();
 	}
 
 	@Override
 	public Omhullende getOmhullende() {
-		// TODO Auto-generated method stub
-		return null;
+		int x = Math.min(this.getHoekPunt1().getX(), Math.min(this.getHoekPunt2().getX(), this.getHoekPunt3().getX()));
+		int y = Math.min(this.getHoekPunt1().getY(), Math.min(this.getHoekPunt2().getY(), this.getHoekPunt3().getY()));
+		Punt linkerBoven = new Punt(x, y);
+		int max = Math.max(this.getHoekPunt1().getX(), Math.max(this.getHoekPunt2().getX(), this.getHoekPunt3().getX()));
+		int maxy = Math.max(this.getHoekPunt1().getY(), Math.max(this.getHoekPunt2().getY(), this.getHoekPunt3().getY()));
+
+		int breedte = max -x;
+		int hoogte = maxy- y;
+		
+		Omhullende omhullende = new Omhullende(linkerBoven, breedte, hoogte);
+		return omhullende;
 	}
 }
