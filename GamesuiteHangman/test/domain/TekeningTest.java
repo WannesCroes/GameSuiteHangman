@@ -50,7 +50,7 @@ public class TekeningTest {
 		new Tekening(null);
 	}
 
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = DomainException.class)
 	public void Tekening_moet_exception_gooien_als_naam_leeg() {
 		new Tekening("");
 	}
