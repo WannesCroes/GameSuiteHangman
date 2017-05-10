@@ -1,7 +1,11 @@
 package domain;
 
+import java.util.LinkedList;
+
 public class TekeningHangMan extends Tekening {
 
+	private LinkedList<Vorm> hangman = new LinkedList<>();
+	
 	public TekeningHangMan(String naam) {
 		super(naam);
 		voegVormenToe();

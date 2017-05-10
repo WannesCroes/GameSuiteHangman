@@ -15,7 +15,6 @@ public abstract class Vorm implements Drawable{
 	@Override
 	public abstract String toString();
 	
-	
 	@Override
 	public abstract boolean equals(Object o);
 }
