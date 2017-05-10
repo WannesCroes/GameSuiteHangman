@@ -71,7 +71,11 @@ public class Launcher {
 								"U heeft een correcte Driehoek aangemaakt: " + driehoek.toString());
 
 					}
+					
 				} else if (input.equals("2")) {
+					GameHoofdScherm view = new GameHoofdScherm( speler.getNaam(), tekening);
+					view.setVisible(true);
+					view.teken();
 					JOptionPane.showMessageDialog(null, tekening.toString());
 				}
 			}

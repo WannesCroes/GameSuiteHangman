@@ -1,6 +1,8 @@
 package domain;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class Tekening implements Drawable {
@@ -54,7 +56,7 @@ public class Tekening implements Drawable {
 	}
 	@Override
 	public String toString(){
-		String output = "Tekening met naam boom bestaat uit " + getAantalVormen() + " vormen :\n";
+		String output = "Tekening met naam " +this.getNaam() + " bestaat uit " + getAantalVormen() + " vormen :\n";
 		for(Vorm v: vormen){
 			output += v.toString() + "\n";
 		}
@@ -82,7 +84,12 @@ public class Tekening implements Drawable {
 	}
 	@Override
 	public void teken(Graphics graphics) {
-		// TODO Auto-generated method stub
+		Graphics2D graphics2D = (Graphics2D) graphics;
+		graphics2D.setStroke(new BasicStroke(5));
+		
+		for(Vorm vorm: vormen){
+			vorm.teken(graphics);
+		}
 		
 	}
 }

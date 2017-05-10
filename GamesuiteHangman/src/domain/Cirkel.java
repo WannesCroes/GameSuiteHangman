@@ -1,6 +1,8 @@
 package domain;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Cirkel extends Vorm {
 	private int radius;
@@ -63,7 +65,12 @@ public class Cirkel extends Vorm {
 
 	@Override
 	public void teken(Graphics graphics) {
-		// TODO Auto-generated method stub
+		Graphics2D graphics2D = (Graphics2D) graphics;
+		graphics2D.setStroke(new BasicStroke(5));
+		
+		graphics.drawOval(this.getOmhullende().getMinimaleX(), this
+				.getOmhullende().getMinimaleY(), this.getOmhullende()
+				.getBreedte(), this.getOmhullende().getHoogte());
 		
 	}
 	
