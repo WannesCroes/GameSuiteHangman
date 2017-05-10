@@ -44,8 +44,8 @@ public class TekenVenster extends Canvas {
 		Driehoek dak = new Driehoek(new Punt(100, 200), new Punt(300, 200),
 				new Punt(200, 100));
 
-		graphics.drawOval(boomkruin.getOmhullende().getMinX(), boomkruin
-				.getOmhullende().getMinY(), boomkruin.getOmhullende()
+		graphics.drawOval(boomkruin.getOmhullende().getMinimaleX(), boomkruin
+				.getOmhullende().getMinimaleY(), boomkruin.getOmhullende()
 				.getBreedte(), boomkruin.getOmhullende().getHoogte());
 
 		graphics.drawRect(gebouw.getLinkerBovenhoek().getX(), gebouw
