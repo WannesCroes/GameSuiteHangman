@@ -1,6 +1,8 @@
 package domain;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Rechthoek extends Vorm {
 	private int breedte;
@@ -80,7 +82,11 @@ public class Rechthoek extends Vorm {
 
 	@Override
 	public void teken(Graphics graphics) {
-		// TODO Auto-generated method stub
+		Graphics2D graphics2D = (Graphics2D) graphics;
+		graphics2D.setStroke(new BasicStroke(5));
+		
+		graphics.drawRect(this.getLinkerBovenhoek().getX(), this.getLinkerBovenhoek().getY(),
+				this.getBreedte(), this.getHoogte());
 		
 	}
 
