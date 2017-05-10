@@ -21,12 +21,13 @@ public class Tekening {
 	}
 
 	public void setNaam(String naam) {
+		if(naam == null || naam.trim().isEmpty()) throw new DomainException("Naam mag niet leeg zijn");
 		this.naam = naam;
 	}
 	
-	//public Vorm getVorm(int index){
-	//	return index;
-	//}
+	public Vorm getVorm(int index){
+		return vormen.get(index);
+	}
 	public int getAantalVormen(){
 		return vormen.size();
 	}
@@ -34,8 +35,8 @@ public class Tekening {
 		vormen.remove(vorm);
 	}
 	public boolean bevat(Vorm vorm){
-		for( Vorm index: vormen){
-			
+		for( Vorm v: vormen){
+			if(vorm.equals(v)) return true;
 		}
 		return false;
 	}
@@ -49,8 +50,31 @@ public class Tekening {
 	}
 	@Override
 	public String toString(){
-		String output = "Tekening met naam boom bestaat uit " + getAantalVormen() + "vormen :/n";
+		String output = "Tekening met naam boom bestaat uit " + getAantalVormen() + "vormen :\n" ;
+		for(Vorm v: vormen){
+			output += v.toString() + "\n";
+		}
 		return output;
 		
+	}
+	@Override
+	public boolean equals(Object o){
+		if( o == this) return true;
+		if( o == null || !(o instanceof Tekening)) return false;
+		Tekening tekening = (Tekening) o;
+		if(tekening.getNaam() != this.getNaam()) return false;
+		
+		if(tekening.getVormen().size() != this.vormen.size()) return false;
+		ArrayList<Vorm> duplicate = new ArrayList<>();
+		duplicate.addAll(tekening.getVormen());
+		for(Vorm vorm: vormen)
+        {
+            if(!duplicate.contains(vorm)) {
+                return false;
+            } else {
+            	duplicate.remove(vorm);
+            }
+        }
+		return true;
 	}
 }
