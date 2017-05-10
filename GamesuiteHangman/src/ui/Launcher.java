@@ -23,9 +23,9 @@ public class Launcher {
 
 			Tekening tekening = createTekening();
 			String input = "1";
-			while (input != "0") {
+			while (!input.equals("0")) {
 				input = showJOptionInputDialog("Wat wil je doen: \n\n 1.Vorm maken \n 2.Tekening tonen \n\n 0.Stoppen",
-						"menu");
+						"menu").trim();
 				if (input.equals("1")) {
 					String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk", "Driehoek" };
 					String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
