@@ -1,5 +1,6 @@
 package domain;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Driehoek extends Vorm{
@@ -88,5 +89,11 @@ public class Driehoek extends Vorm{
 		
 		Omhullende omhullende = new Omhullende(linkerBoven, breedte, hoogte);
 		return omhullende;
+	}
+
+	@Override
+	public void teken(Graphics graphics) {
+		// TODO Auto-generated method stub
+		
 	}
 }

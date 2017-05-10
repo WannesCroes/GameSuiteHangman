@@ -1,5 +1,7 @@
 package domain;
 
+import java.awt.Graphics;
+
 public class Rechthoek extends Vorm {
 	private int breedte;
 	private int hoogte;
@@ -74,6 +76,12 @@ public class Rechthoek extends Vorm {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void teken(Graphics graphics) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
