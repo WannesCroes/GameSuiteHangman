@@ -35,14 +35,22 @@ public class Tekening {
 	}
 	public boolean bevat(Vorm vorm){
 		for( Vorm index: vormen){
+			
 		}
 		return false;
 	}
+	
 	public ArrayList<Vorm> getVormen() {
 		return vormen;
 	}
 
 	public void setVormen(ArrayList<Vorm> vormen) {
 		this.vormen = vormen;
+	}
+	@Override
+	public String toString(){
+		String output = "Tekening met naam boom bestaat uit " + getAantalVormen() + "vormen :/n";
+		return output;
+		
 	}
 }
