@@ -1,5 +1,7 @@
 package domain;
 
+import java.awt.Graphics;
+
 public class Rechthoek extends Vorm {
 	private int breedte;
 	private int hoogte;
@@ -52,7 +54,7 @@ public class Rechthoek extends Vorm {
 	@Override
 	public String toString() {
 		return "Rechthoek: positie: (" + this.linkerBovenHoek.getX() + ", " + this.linkerBovenHoek.getY() + ") - breedte: "
-				+ this.getBreedte() + " - hoogte: " + this.getHoogte();
+				+ this.getBreedte() + " - hoogte: " + this.getHoogte() + "\n" + "Omhullende: " + this.getOmhullende().toString();
 	}
 
 	@Override
@@ -74,6 +76,12 @@ public class Rechthoek extends Vorm {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void teken(Graphics graphics) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

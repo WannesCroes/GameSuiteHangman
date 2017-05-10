@@ -16,6 +16,7 @@ public class TekeningTest {
 	private Vorm raambalk1;
 	private Vorm raambalk2;
 	private Vorm schouwNietInTekening;
+	private Tekening tekening;
 	
 	@Before
 	public void setUp() {
@@ -27,6 +28,7 @@ public class TekeningTest {
 		raambalk1 = new LijnStuk(new Punt(210, 250), new Punt(290, 250));
 		raambalk2 = new LijnStuk(new Punt(250, 220), new Punt(250, 280));
 		schouwNietInTekening = new Rechthoek(new Punt(150, 150), 20,40);
+		tekening = new Tekening("tekenvlak");
 	}
 
 	@Test
@@ -35,13 +37,20 @@ public class TekeningTest {
 		assertEquals("huis", huis.getNaam());
 		assertEquals(0, huis.getAantalVormen());
 	}
+	
+	
+	@Test (expected = DomainException.class)
+	public void voegToe_gooit_exception_wanneer_minX_omhullende_kleiner_is_dan_minX_van_tekening(){
+		Cirkel cirkel = new Cirkel(new Punt(50, 50), 55);
+		tekening.voegToe(cirkel);
+	}
 
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = DomainException.class)
 	public void Tekening_moet_exception_gooien_als_naam_null() {
 		new Tekening(null);
 	}
 
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = DomainException.class)
 	public void Tekening_moet_exception_gooien_als_naam_leeg() {
 		new Tekening("");
 	}
@@ -100,6 +109,9 @@ public class TekeningTest {
 		huisMetSchouw.verwijder(schouwNietInTekening);
 		assertTrue(huis.equals(huisMetSchouw));
 	}
+
+	
+	
 
 
 	public Tekening createHuisMetSchouw() {

@@ -1,8 +1,9 @@
 package domain;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class Tekening {
+public class Tekening implements Drawable {
 	private String naam;
 	public static final int MIN_X = 0;
 	public static final int MIN_Y = 0;
@@ -14,6 +15,9 @@ public class Tekening {
 		this.setNaam(naam);
 	}
 	public void voegToe(Vorm vorm){
+		if(vorm.getOmhullende().getMinimaleX() < MIN_X ){
+			throw new DomainException("Vorm valt buiten de tekening.");
+		}
 		vormen.add(vorm);
 	}
 	public String getNaam() {
@@ -62,7 +66,6 @@ public class Tekening {
 		if( o == this) return true;
 		if( o == null || !(o instanceof Tekening)) return false;
 		Tekening tekening = (Tekening) o;
-		if(tekening.getNaam() != this.getNaam()) return false;
 		
 		if(tekening.getVormen().size() != this.vormen.size()) return false;
 		ArrayList<Vorm> duplicate = new ArrayList<>();
@@ -76,5 +79,10 @@ public class Tekening {
             }
         }
 		return true;
+	}
+	@Override
+	public void teken(Graphics graphics) {
+		// TODO Auto-generated method stub
+		
 	}
 }
