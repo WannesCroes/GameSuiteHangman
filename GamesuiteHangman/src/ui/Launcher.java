@@ -9,6 +9,7 @@ import domain.LijnStuk;
 import domain.Punt;
 import domain.Rechthoek;
 import domain.Speler;
+import domain.Tekening;
 import domain.exceptions.*;
 
 public class Launcher {
@@ -19,9 +20,14 @@ public class Launcher {
 
 			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
 					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-
-			String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk", "Driehoek" };
-			String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
+			
+			Tekening tekening = createTekening();
+			String input = "1";
+			while(input != "0"){
+				input = JOptionPane.showInputDialog("Wat wil je doen: \n\n 1.Vorm maken \n 2.Tekening tonen \n\n 0.Stoppen");
+				if(input.equals("1")){
+					String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk", "Driehoek" };
+					String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
 
 			if (keuze.equals("Cirkel")) {
 				Punt punt = createPunt("middelpunt");
@@ -30,7 +36,7 @@ public class Launcher {
 						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 				
 				Cirkel cirkel = createCirkel(punt);
-
+				tekening.voegToe(cirkel);
 				JOptionPane.showMessageDialog(null, "U heeft een correcte cirkel aangemaakt: " + cirkel.toString(),
 						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 				
@@ -41,21 +47,25 @@ public class Launcher {
 						speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 				
 				Rechthoek rechthoek = createRechthoek(punt);
-
+				tekening.voegToe(rechthoek);
 				JOptionPane.showMessageDialog(null,
 						"U heeft een correcte rechthoek aangemaakt: " + rechthoek.toString(), speler.getNaam(),
 						JOptionPane.INFORMATION_MESSAGE);
 				
 			} else if (keuze.equals("LijnStuk")) {
 				LijnStuk lijnstuk = createLijnstuk();
-				
+				tekening.voegToe(lijnstuk);
 				JOptionPane.showMessageDialog(null, "U heeft een correct Lijnstuk aangemaakt: " + lijnstuk.toString());
 			}else if (keuze.equals("Driehoek")){
 				Driehoek driehoek = createDriehoek();
 				JOptionPane.showMessageDialog(null, "U heeft een correcte Driehoek aangemaakt: " + driehoek.toString());
 
 			}
-		} catch (CancelledException e) {
+		}
+		else if(input.equals("2")){
+			JOptionPane.showMessageDialog(null, tekening.toString());
+		}}}
+		catch (CancelledException e) {
 			return;
 		}
 	}
@@ -90,6 +100,18 @@ public class Launcher {
 			speler = createSpeler();
 		}
 		return speler;
+	}
+	
+	private static Tekening createTekening() throws CancelledException {
+		Tekening tekening;
+		try{
+			String naam = showJOptionInputDialog("Geef de naam van je tekening:", "naam");
+			tekening = new Tekening(naam);
+		}catch (DomainException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			tekening = createTekening();
+		}
+		return tekening;
 	}
 	
 	private static Punt createPunt(String soort) throws CancelledException {

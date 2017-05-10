@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Tekening {
 	private String naam;
-	private static final int MIN_X = 0;
-	private static final int MIN_Y = 0;
-	private static final int MAX_X = 399;
-	private static final int MAX_Y = 399;
+	public static final int MIN_X = 0;
+	public static final int MIN_Y = 0;
+	public static final int MAX_X = 399;
+	public static final int MAX_Y = 399;
 	ArrayList<Vorm> vormen = new ArrayList<>();
 	
 	public Tekening(String naam){
@@ -50,7 +50,7 @@ public class Tekening {
 	}
 	@Override
 	public String toString(){
-		String output = "Tekening met naam boom bestaat uit " + getAantalVormen() + "vormen :\n" ;
+		String output = "Tekening met naam boom bestaat uit " + getAantalVormen() + " vormen :\n";
 		for(Vorm v: vormen){
 			output += v.toString() + "\n";
 		}
