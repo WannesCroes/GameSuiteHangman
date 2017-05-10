@@ -75,8 +75,7 @@ public class Rechthoek extends Vorm {
 		}
 		return true;
 	}
-	
-	
+
 	
 	
 	

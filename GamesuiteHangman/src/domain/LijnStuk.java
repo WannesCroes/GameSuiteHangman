@@ -38,5 +38,10 @@ public class LijnStuk extends Vorm {
 		String output = "Lijn: startpunt: " + start.toString() + " - eindpunt: " + eind.toString();
 		return output;
 	}
+	@Override
+	public Omhullende getOmhullende() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

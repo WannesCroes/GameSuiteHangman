@@ -12,6 +12,6 @@ public abstract class Vorm {
 	public abstract String toString();
 	
 	
-	//override??
-	public abstract boolean equals();
+	@Override
+	public abstract boolean equals(Object o);
 }
