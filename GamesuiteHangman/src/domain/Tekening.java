@@ -14,7 +14,7 @@ public class Tekening {
 		this.setNaam(naam);
 	}
 	public void voegToe(Vorm vorm){
-		if(vorm.getOmhullende().getMaximaleX() < MIN_X ){
+		if(vorm.getOmhullende().getMinimaleX() < MIN_X ){
 			throw new DomainException("Vorm valt buiten de tekening.");
 		}
 		vormen.add(vorm);
@@ -65,7 +65,6 @@ public class Tekening {
 		if( o == this) return true;
 		if( o == null || !(o instanceof Tekening)) return false;
 		Tekening tekening = (Tekening) o;
-		if(tekening.getNaam() != this.getNaam()) return false;
 		
 		if(tekening.getVormen().size() != this.vormen.size()) return false;
 		ArrayList<Vorm> duplicate = new ArrayList<>();
