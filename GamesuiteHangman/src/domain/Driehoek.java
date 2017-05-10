@@ -9,6 +9,7 @@ public class Driehoek extends Vorm{
 	private Punt punt1;
 	private Punt punt2;
 	private Punt punt3;
+	private boolean zichtbaar = true;
 	
 	public Driehoek(Punt punt1, Punt punt2, Punt punt3) {
 		setHoekpunten(punt1,punt2,punt3);
@@ -95,14 +96,23 @@ public class Driehoek extends Vorm{
 
 	@Override
 	public void teken(Graphics graphics) {
-		Graphics2D graphics2D = (Graphics2D) graphics;
-		graphics2D.setStroke(new BasicStroke(5));
 		
-		int[] xPoints = { this.getHoekPunt1().getX(), this.getHoekPunt2().getX(),
+		if(isZichtbaar()){
+			int[] xPoints = { this.getHoekPunt1().getX(), this.getHoekPunt2().getX(),
 				this.getHoekPunt3().getX() };
-		int[] yPoints = { this.getHoekPunt1().getY(), this.getHoekPunt2().getY(),
+			int[] yPoints = { this.getHoekPunt1().getY(), this.getHoekPunt2().getY(),
 				this.getHoekPunt3().getY() };
-		graphics.drawPolygon(xPoints, yPoints, 3);
-		
+			graphics.drawPolygon(xPoints, yPoints, 3);
+		}
+	}
+
+	@Override
+	public boolean isZichtbaar() {
+		return this.zichtbaar;
+	}
+
+	@Override
+	public void setZichtbaar(boolean zichtbaar) {
+		this.zichtbaar = zichtbaar;		
 	}
 }

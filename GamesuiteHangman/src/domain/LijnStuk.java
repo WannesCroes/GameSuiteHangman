@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 public class LijnStuk extends Vorm {
 	Punt start;
 	Punt eind;
+	private boolean zichtbaar = true;
 	
 	public LijnStuk(Punt start, Punt eind){
 		this.setStartEnEindPunt(start, eind);
@@ -24,6 +25,8 @@ public class LijnStuk extends Vorm {
 		this.start = start;
 		this.eind = eind;
 	}
+	
+	
 	
 	@Override
 	public boolean equals(Object o){
@@ -54,11 +57,20 @@ public class LijnStuk extends Vorm {
 	}
 	@Override
 	public void teken(Graphics graphics) {
-		Graphics2D graphics2D = (Graphics2D) graphics;
-		graphics2D.setStroke(new BasicStroke(5));
 		
-		graphics.drawLine(this.getStartPunt().getX(), this.getStartPunt().getY(), 
+		if(isZichtbaar()){
+			graphics.drawLine(this.getStartPunt().getX(), this.getStartPunt().getY(), 
 				this.getEindPunt().getX(), this.getEindPunt().getY());
+		}
+	}
+	@Override
+	public boolean isZichtbaar() {
+		return this.zichtbaar;
+	}
+	@Override
+	public void setZichtbaar(boolean zichtbaar) {
+		this.zichtbaar = zichtbaar;
+		
 	}
 	
 }

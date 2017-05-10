@@ -8,6 +8,7 @@ public class Rechthoek extends Vorm {
 	private int breedte;
 	private int hoogte;
 	private Punt linkerBovenHoek;
+	private boolean zichtbaar = true;
 	
 	public Rechthoek(Punt linkerbovenhoek, int breedte, int hoogte) {
 		this.setBreedte(breedte);
@@ -82,11 +83,20 @@ public class Rechthoek extends Vorm {
 
 	@Override
 	public void teken(Graphics graphics) {
-		Graphics2D graphics2D = (Graphics2D) graphics;
-		graphics2D.setStroke(new BasicStroke(5));
-		
-		graphics.drawRect(this.getLinkerBovenhoek().getX(), this.getLinkerBovenhoek().getY(),
+		if(isZichtbaar()){
+			graphics.drawRect(this.getLinkerBovenhoek().getX(), this.getLinkerBovenhoek().getY(),
 				this.getBreedte(), this.getHoogte());
+		}
+	}
+
+	@Override
+	public boolean isZichtbaar() {
+		return this.zichtbaar;
+	}
+
+	@Override
+	public void setZichtbaar(boolean zichtbaar) {
+		this.zichtbaar = zichtbaar;
 		
 	}
 

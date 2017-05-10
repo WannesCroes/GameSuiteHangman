@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 public class Cirkel extends Vorm {
 	private int radius;
 	private Punt middelpunt;
+	private boolean zichtbaar = true;
 	
 	
 	public Cirkel(Punt middelpunt, int radius){
@@ -65,12 +66,21 @@ public class Cirkel extends Vorm {
 
 	@Override
 	public void teken(Graphics graphics) {
-		Graphics2D graphics2D = (Graphics2D) graphics;
-		graphics2D.setStroke(new BasicStroke(5));
-		
+		if(isZichtbaar()){		
 		graphics.drawOval(this.getOmhullende().getMinimaleX(), this
 				.getOmhullende().getMinimaleY(), this.getOmhullende()
 				.getBreedte(), this.getOmhullende().getHoogte());
+		}
+	}
+
+	@Override
+	public boolean isZichtbaar() {
+		return this.zichtbaar;
+	}
+
+	@Override
+	public void setZichtbaar(boolean zichtbaar) {
+		this.zichtbaar = zichtbaar;
 		
 	}
 	
