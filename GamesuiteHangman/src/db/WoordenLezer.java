@@ -12,18 +12,24 @@ public class WoordenLezer {
 	private ArrayList<String> woordenlijst;
 	private File file;
 	private volatile static WoordenLezer uniqueInstance;
+	private String bestandsNaam;
 	
-	private WoordenLezer() {
+	private WoordenLezer(String bestandsNaam) {
+		this.setBestandsNaam(bestandsNaam);
 		file = new File("hangman.txt");
 		this.woordenlijst = new ArrayList<>();
 		open();
 	}
 	
+	public void setBestandsNaam(String bestandsNaam) {
+		this.bestandsNaam = bestandsNaam;
+	}
+
 	public static WoordenLezer getInstance() {
 		if(uniqueInstance == null) {
 			synchronized (WoordenLezer.class) {
 				if(uniqueInstance == null) {
-					uniqueInstance = new WoordenLezer();
+					uniqueInstance = new WoordenLezer("hangMan1");
 				}
 			}
 		}
