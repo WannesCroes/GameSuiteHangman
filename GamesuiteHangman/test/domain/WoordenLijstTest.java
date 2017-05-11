@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.exceptions.DatabaseException;
+
 public class WoordenLijstTest {
 	
 	private WoordenLijst woordenlijstLeeg;
@@ -32,35 +34,40 @@ public class WoordenLijstTest {
 		woordenlijstMetGeldigeWoorden.voegToe(geldigeWoorden.get(2));
 		
 	}
-
-	@Test
-	public void WoordenLijst_moet_een_Woordenlijst_maken_zonder_woorden() {
-		WoordenLijst woordenlijstLeeg = new WoordenLijst();
-		assertEquals(0,woordenlijstLeeg.getAantalWoorden());
-	}
 	
 	@Test
-	public void voegToe_moet_een_woord_toevoegen() {
+	public void getRandomWoord_moet_null_teruggeven_als_lijst_leeg() throws DatabaseException {
+		WoordenLijst woordenlijstLeeg = new WoordenLijst();
+		assertEquals(null,woordenlijstLeeg.getRandomWoord());
+	}
+	@Test
+	public void Als_lijst_1_woord_bevat_geeft_dat_woord_terug() throws DatabaseException {
+		ArrayList<String> lijst = new ArrayList<>();
+		lijst.add("test");
+		assertEquals("test", lijst.get(0));
+	}
+	@Test
+	public void voegToe_moet_een_woord_toevoegen() throws DatabaseException {
 		woordenlijstLeeg.voegToe(geldigeWoorden.get(0));
 		
 		assertEquals(1,woordenlijstLeeg.getAantalWoorden());
 	}
 	
 	@Test (expected = DomainException.class)
-	public void voegToe_moet_exception_gooien_als_gegeven_woord_null() {
+	public void voegToe_moet_exception_gooien_als_gegeven_woord_null() throws DatabaseException  {
 		woordenlijstLeeg.voegToe(null);
 	}
 	
 	@Test (expected = DomainException.class)
-	public void voegToe_moet_exception_gooien_als_gegeven_woord_leeg() {
+	public void voegToe_moet_exception_gooien_als_gegeven_woord_leeg() throws DatabaseException {
 		woordenlijstLeeg.voegToe("");
 	}
 	
-	@Test (expected = DomainException.class)
-	public void voegToe_moet_exception_gooien_als_gegeven_woord_reeds_in_lijst() {
+	@Test (expected = DatabaseException.class)
+	public void voegToe_moet_exception_gooien_als_gegeven_woord_reeds_in_lijst() throws DatabaseException {
 		String woordAlInLijst = geldigeWoorden.get(2);
 
 		woordenlijstMetGeldigeWoorden.voegToe(woordAlInLijst);
 	}
-
+	
 }
