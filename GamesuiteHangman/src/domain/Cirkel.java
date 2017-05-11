@@ -8,51 +8,53 @@ public class Cirkel extends Vorm {
 	private int radius;
 	private Punt middelpunt;
 	private boolean zichtbaar = true;
-	
-	
-	public Cirkel(Punt middelpunt, int radius){
+
+	public Cirkel(Punt middelpunt, int radius) {
 		setRadius(radius);
 		setMiddelpunt(middelpunt);
 	}
-	
-	private void setRadius(int radius){
-		if(radius <= 0 ){
+
+	private void setRadius(int radius) {
+		if (radius <= 0) {
 			throw new DomainException("Straal mag niet gelijk zijn aan 0");
 		}
 		this.radius = radius;
 	}
-	public int getRadius(){
+
+	public int getRadius() {
 		return radius;
-		
+
 	}
-	public void setMiddelpunt(Punt Middelpunt){
-		if(Middelpunt == null ){
+
+	public void setMiddelpunt(Punt Middelpunt) {
+		if (Middelpunt == null) {
 			throw new DomainException("Middelpunt mag niet gelijk zijn aan 0");
 		}
 		this.middelpunt = Middelpunt;
 	}
-	
-	public Punt getMiddelpunt(){
+
+	public Punt getMiddelpunt() {
 		return middelpunt;
 	}
-	
+
 	@Override
-	public boolean equals(Object object){
-		if(object ==null){
+	public boolean equals(Object object) {
+		if (object == null) {
 			return false;
 		}
-		if(object instanceof Cirkel){
+		if (object instanceof Cirkel) {
 			Cirkel cirkel = (Cirkel) object;
-			if(this.getMiddelpunt().equals(cirkel.getMiddelpunt()) && this.getRadius() == cirkel.getRadius()){
+			if (this.getMiddelpunt().equals(cirkel.getMiddelpunt()) && this.getRadius() == cirkel.getRadius()) {
 				return true;
 			}
 			return false;
 		}
 		return false;
 	}
-	
-	public String toString(){
-		return "Cirkel: Middelpunt: " + this.getMiddelpunt() + " - straal: " + this.getRadius()+ "\n" + "Omhullende: " + this.getOmhullende().toString();		
+
+	public String toString() {
+		return "Cirkel: Middelpunt: " + this.getMiddelpunt() + " - straal: " + this.getRadius() + "\n" + "Omhullende: "
+				+ this.getOmhullende().toString();
 	}
 
 	@Override
@@ -66,10 +68,9 @@ public class Cirkel extends Vorm {
 
 	@Override
 	public void teken(Graphics graphics) {
-		if(isZichtbaar()){		
-		graphics.drawOval(this.getOmhullende().getMinimaleX(), this
-				.getOmhullende().getMinimaleY(), this.getOmhullende()
-				.getBreedte(), this.getOmhullende().getHoogte());
+		if (isZichtbaar()) {
+			graphics.drawOval(this.getOmhullende().getMinimaleX(), this.getOmhullende().getMinimaleY(),
+					this.getOmhullende().getBreedte(), this.getOmhullende().getHoogte());
 		}
 	}
 
@@ -81,7 +82,7 @@ public class Cirkel extends Vorm {
 	@Override
 	public void setZichtbaar(boolean zichtbaar) {
 		this.zichtbaar = zichtbaar;
-		
+
 	}
-	
+
 }
