@@ -41,8 +41,8 @@ public class WoordenLezer {
 		return this.woordenlijst.get(id);
 	}
 
-	public void addWoord(String woord) throws DatabaseException {
-		if (woord != null && this.woordenlijst.contains(woord.trim())) {
+	public void addWoord(String woord) throws DatabaseException  {
+		if (woord == null && this.woordenlijst.contains(woord.trim())) {
 			throw new DatabaseException("woord zit al in de woordenlijst");
 		}
 		
