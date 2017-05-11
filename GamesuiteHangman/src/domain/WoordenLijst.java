@@ -3,22 +3,21 @@ package domain;
 import java.util.ArrayList;
 import java.util.Random;
 
-import domain.exceptions.DatabaseException;
+import db.WoordenLezer;
 
 public class WoordenLijst {
 
 	ArrayList<String> woordenlijst;
 
 	public WoordenLijst() {
-		//this.woordenlijst = WoordenLezer.getInstance();
-		woordenlijst = new ArrayList<>();
+		this.woordenlijst = WoordenLezer.getInstance().getAlleWoorden();
 	}
 
 	public int getAantalWoorden() {
 		return woordenlijst.size();
 	}
 
-	public void voegToe(String woord) throws DatabaseException {
+	public void voegToe(String woord) throws DomainException {
 		if(woord == null || woord.trim().isEmpty()){
 			throw new DomainException("geen geldige naam");
 		}
@@ -28,9 +27,9 @@ public class WoordenLijst {
 		woordenlijst.add(woord);
 	}
 
-	public String getRandomWoord() throws DatabaseException {
-		if (getAantalWoorden() == 0) return null;
-		else if(getAantalWoorden() == 1) return woordenlijst.get(1);
+	public String getRandomWoord() throws DomainException {
+		if (this.getAantalWoorden() == 0) return null;
+		else if(this.getAantalWoorden() == 1) return woordenlijst.get(1);
 		else {
 			Random rand = new Random();
 			int index = rand.nextInt(getAantalWoorden());
