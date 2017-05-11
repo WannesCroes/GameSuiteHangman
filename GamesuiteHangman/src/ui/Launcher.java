@@ -20,9 +20,6 @@ public class Launcher {
 		try {
 			Speler speler = createSpeler();
 
-			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
-					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-
 			String[] games = {"Hangman", "Pictionary"};
 			String game = showJOptionDropdownDialog("Dag " + speler.getNaam(), "welk spel wilt u spelen?", 
 					games, games[0]);
@@ -32,8 +29,10 @@ public class Launcher {
 				ui.showMenu();
 			} else {
 				WoordenLijst woordenlijst = new WoordenLijst();
-				HangmanPaneel paneel = new HangmanPaneel(new HangMan(speler.getNaam(), woordenlijst));
-				paneel.setVisible(true);
+				HangMan hangman = new HangMan(speler.getNaam(), woordenlijst);
+				HangmanPaneel paneel = new HangmanPaneel(hangman);
+				HangManHoofdScherm main = new HangManHoofdScherm(hangman, paneel);
+				main.start();
 			}
 		} catch (CancelledException e) {
 			return;

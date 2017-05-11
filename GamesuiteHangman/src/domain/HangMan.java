@@ -28,7 +28,11 @@ public class HangMan {
 	}
 	
 	public void raad(char l) {
-		this.hintwoord.raad(l);
+		boolean guess = this.hintwoord.raad(l);
+		
+		if (!guess) {
+			this.tekening.zetVolgendeZichtbaar();
+		}
 	}
 	
 	public boolean isGameOver() {
@@ -37,6 +41,11 @@ public class HangMan {
 	
 	public boolean isGewonnen() {
 		return this.hintwoord.isGeraden();
+	}
+	
+	public void reset() {
+		this.hintwoord = new HintWoord(woorden.getRandomWoord());
+		tekening.reset();
 	}
 
 }

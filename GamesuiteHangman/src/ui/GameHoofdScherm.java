@@ -30,7 +30,6 @@ public class GameHoofdScherm extends JFrame{
 		this.pack();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
 	}
 	
 	public void teken(){
