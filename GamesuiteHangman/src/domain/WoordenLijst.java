@@ -1,27 +1,40 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-import db.WoordenLezer;
 import domain.exceptions.DatabaseException;
 
 public class WoordenLijst {
-	
-	WoordenLezer woordenlijst;
-	public WoordenLijst(){
-		this.woordenlijst = WoordenLezer.getInstance();
+
+	ArrayList<String> woordenlijst;
+
+	public WoordenLijst() {
+		//this.woordenlijst = WoordenLezer.getInstance();
+		woordenlijst = new ArrayList<>();
 	}
-	
-	public int getAantalWoorden(){
-		return woordenlijst.getAlleWoorden().size();
+
+	public int getAantalWoorden() {
+		return woordenlijst.size();
 	}
-	public void voegToe(String woord) throws DatabaseException{
-		woordenlijst.addWoord(woord);;
+
+	public void voegToe(String woord) throws DatabaseException {
+		if(woord == null || woord.trim().isEmpty()){
+			throw new DomainException("geen geldige naam");
+		}
+		if(woordenlijst.contains(woord)){
+			throw new DomainException("geen geldige naam");
+		}
+		woordenlijst.add(woord);
 	}
-	public String getRandomWoord() throws DatabaseException{
+
+	public String getRandomWoord() throws DatabaseException {
 		if (getAantalWoorden() == 0) return null;
-		Random rand = new Random();
-		int index = rand.nextInt(getAantalWoorden());
-		return woordenlijst.getWoord(index);
+		else if(getAantalWoorden() == 1) return woordenlijst.get(1);
+		else {
+			Random rand = new Random();
+			int index = rand.nextInt(getAantalWoorden());
+			return woordenlijst.get(index);
+		}
 	}
 }

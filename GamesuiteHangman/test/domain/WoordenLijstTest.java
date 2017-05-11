@@ -37,14 +37,14 @@ public class WoordenLijstTest {
 	
 	@Test
 	public void getRandomWoord_moet_null_teruggeven_als_lijst_leeg() throws DatabaseException {
-		WoordenLijst woordenlijstLeeg = new WoordenLijst();
+		//WoordenLijst woordenlijstl = new WoordenLijst();
 		assertEquals(null,woordenlijstLeeg.getRandomWoord());
 	}
 	@Test
 	public void Als_lijst_1_woord_bevat_geeft_dat_woord_terug() throws DatabaseException {
 		ArrayList<String> lijst = new ArrayList<>();
-		lijst.add("test");
-		assertEquals("test", lijst.get(0));
+		lijst.add("bob");
+		assertEquals("bob", lijst.get(0));
 	}
 	@Test
 	public void voegToe_moet_een_woord_toevoegen() throws DatabaseException {
@@ -63,7 +63,7 @@ public class WoordenLijstTest {
 		woordenlijstLeeg.voegToe("");
 	}
 	
-	@Test (expected = DatabaseException.class)
+	@Test (expected = DomainException.class)
 	public void voegToe_moet_exception_gooien_als_gegeven_woord_reeds_in_lijst() throws DatabaseException {
 		String woordAlInLijst = geldigeWoorden.get(2);
 
