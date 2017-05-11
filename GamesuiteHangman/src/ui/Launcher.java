@@ -29,7 +29,7 @@ public class Launcher {
 				ui.showMenu();
 			} else {
 				WoordenLijst woordenlijst = new WoordenLijst();
-				HangMan hangman = new HangMan(speler.getNaam(), woordenlijst);
+				HangMan hangman = new HangMan(speler, woordenlijst);
 				HangmanPaneel paneel = new HangmanPaneel(hangman);
 				HangManHoofdScherm main = new HangManHoofdScherm(hangman, paneel);
 				main.start();

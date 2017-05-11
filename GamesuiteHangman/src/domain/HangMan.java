@@ -3,23 +3,30 @@ package domain;
 import ui.TekeningHangMan;
 
 public class HangMan {
-	private String speler;
+	private Speler speler;
 	private WoordenLijst woorden;
 	private HintWoord hintwoord;
 	private TekeningHangMan tekening;
 	
-	public HangMan(String speler, WoordenLijst woordenlijst) {
-		this.speler = speler;
+	public HangMan(Speler speler, WoordenLijst woordenlijst) {
+		setSpeler(speler);
 		this.woorden = woordenlijst;
 		this.hintwoord = new HintWoord(woordenlijst.getRandomWoord());
 		this.tekening = new TekeningHangMan();
+	}
+	
+	private void setSpeler(Speler speler){
+		if(speler == null){
+			throw new DomainException("Geef een geldige naam");
+		}
+		this.speler = speler;
 	}
 	
 	public String getHint() {
 		return this.hintwoord.toString();
 	}
 	
-	public String getSpeler() {
+	public Speler getSpeler() {
 		return this.speler;
 	}
 	
