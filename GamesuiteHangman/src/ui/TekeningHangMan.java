@@ -88,6 +88,7 @@ public class TekeningHangMan extends Tekening {
 		for(int i = 4; i < getAantalVormen(); i++) {
 			getVorm(i).setZichtbaar(false);
 		}
+		aantalZichtbaar = 4;
 	}
 	
 	@Override
