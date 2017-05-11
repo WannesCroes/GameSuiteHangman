@@ -15,6 +15,7 @@ public class HangManUI {
 		this.speler = speler;
 		this.woordenlijst = woordenlijst;
 	}
+	
 	public void play(){
 		HintWoord hintwoord = new HintWoord("test");
 		String letter = JOptionPane.showInputDialog("Rarara, welk woord zoeken we \n" + hintwoord.toString() + "\n\n Geef een letter:");

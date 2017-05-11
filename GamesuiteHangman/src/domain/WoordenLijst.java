@@ -9,7 +9,7 @@ public class WoordenLijst {
 	
 	WoordenLezer woordenlijst;
 	public WoordenLijst(){
-		this.woordenlijst =  WoordenLezer.getInstance();
+		this.woordenlijst = WoordenLezer.getInstance();
 	}
 	
 	public int getAantalWoorden(){
