@@ -22,66 +22,16 @@ public class Launcher {
 			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
 					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 
-			Tekening tekening = createTekening();
-			String input = "1";
-			while (!input.equals("0")) {
-				input = showJOptionInputDialog("Wat wil je doen: \n\n 1.Vorm maken \n 2.Tekening tonen \n 3.HangMan \n\n 0.Stoppen",
-						"menu").trim();
-				if (input.equals("1")) {
-					String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk", "Driehoek" };
-					String keuze = showJOptionDropdownDialog("Wat wilt u tekenen", "input", shapes, shapes[0]);
+			String[] games = {"Pictionary", "HangMan"};
+			String game = showJOptionDropdownDialog("Dag " + speler.getNaam(), "welk spel wilt u spelen?", 
+					games, games[0]);
 
-					if (keuze.equals("Cirkel")) {
-						Punt punt = createPunt("middelpunt");
-
-						JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(),
-								speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-
-						Cirkel cirkel = createCirkel(punt);
-						tekening.voegToe(cirkel);
-						
-						JOptionPane.showMessageDialog(null,
-								"U heeft een correcte cirkel aangemaakt: " + cirkel.toString(), speler.getNaam(),
-								JOptionPane.INFORMATION_MESSAGE);
-
-					} else if (keuze.equals("Rechthoek")) {
-						Punt punt = createPunt("linkerbovenhoekpunt");
-
-						JOptionPane.showMessageDialog(null, "U heeft een correct punt aangemaakt: " + punt.toString(),
-								speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
-
-						Rechthoek rechthoek = createRechthoek(punt);
-						tekening.voegToe(rechthoek);
-						
-						JOptionPane.showMessageDialog(null,
-								"U heeft een correcte rechthoek aangemaakt: " + rechthoek.toString(), speler.getNaam(),
-								JOptionPane.INFORMATION_MESSAGE);
-
-					} else if (keuze.equals("LijnStuk")) {
-						LijnStuk lijnstuk = createLijnstuk();
-						tekening.voegToe(lijnstuk);
-						
-						JOptionPane.showMessageDialog(null,
-								"U heeft een correct Lijnstuk aangemaakt: " + lijnstuk.toString());
-						
-					} else if (keuze.equals("Driehoek")) {
-						Driehoek driehoek = createDriehoek();
-						tekening.voegToe(driehoek);
-						
-						JOptionPane.showMessageDialog(null,
-								"U heeft een correcte Driehoek aangemaakt: " + driehoek.toString());
-
-					}
-					
-				} else if (input.equals("2")) {
-					GameHoofdScherm view = new GameHoofdScherm( speler.getNaam(), tekening);
-					view.setVisible(true);
-					view.teken();
-					JOptionPane.showMessageDialog(null, tekening.toString());
-				} else if (input.equals("3")){
-					HangManUI view = new HangManUI(speler, new WoordenLijst());
-					view.play();
-				}
+			if (game.equals("Pictionary")) {
+				PictionaryUI ui = new PictionaryUI(speler);
+				ui.showMenu();
+			} else {
+				HangManUI ui = new HangManUI(speler, new WoordenLijst());
+				ui.play();
 			}
 		} catch (CancelledException e) {
 			return;
