@@ -22,7 +22,7 @@ public class Launcher {
 			JOptionPane.showMessageDialog(null, speler.getNaam() + " heeft als score: " + speler.getScore(),
 					speler.getNaam(), JOptionPane.INFORMATION_MESSAGE);
 
-			String[] games = {"Pictionary", "HangMan"};
+			String[] games = {"Hangman", "Pictionary"};
 			String game = showJOptionDropdownDialog("Dag " + speler.getNaam(), "welk spel wilt u spelen?", 
 					games, games[0]);
 
@@ -35,6 +35,9 @@ public class Launcher {
 			}
 		} catch (CancelledException e) {
 			return;
+		} catch (DatabaseException e) {
+			JOptionPane.showMessageDialog(null, "hangman.txt bestaat niet",
+					"critical error", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

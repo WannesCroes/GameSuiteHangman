@@ -46,8 +46,6 @@ public class PictionaryUI {
 							throw new CancelledException("");
 					}
 				}
-				
-				
 			}
 		} catch (CancelledException e) {
 			return;
