@@ -22,7 +22,7 @@ public class HangManUI {
 		GameHoofdScherm main = new GameHoofdScherm("hangman", hangman);
 
 		HintWoord hintwoord = new HintWoord(this.woordenlijst.getRandomWoord());
-
+		
 		String l;
 		boolean start = true;
 		boolean geraden = false;
