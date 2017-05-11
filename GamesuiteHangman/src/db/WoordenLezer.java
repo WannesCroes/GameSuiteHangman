@@ -3,6 +3,7 @@ package db;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,13 +57,14 @@ public class WoordenLezer {
 	}
 
 	public void open() {
+		
 		try {
 			Scanner scanner = new Scanner(file);
 			Scanner line = null;
 			
 			while(scanner.hasNext()) {
 				line = new Scanner(scanner.nextLine());
-				String woord = line.next();
+				String woord = line.nextLine();
 								
 				this.addWoord(woord);						
 			}
@@ -73,7 +75,27 @@ public class WoordenLezer {
 				line.close();
 			}
 		} catch(FileNotFoundException e) {
-			e.printStackTrace();
+			PrintWriter writer;
+			try {
+				writer = new PrintWriter("hangman.txt", "UTF-8");
+			    writer.println("overerving");
+			    writer.println("statisch type");
+			    writer.println("dynamisch type");
+			    writer.println("try catch finally");
+			    writer.println("abstract class");
+			    writer.println("checked exception");
+			    writer.println("unchecked exception");
+			    writer.println("IllegalArgumentException");
+			    writer.println("NullPointerException");
+			    writer.println("junit test");
+			    writer.println("test first development");
+			    writer.println("interface");
+			    writer.close();
+			    this.open();
+			} catch (FileNotFoundException | UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
