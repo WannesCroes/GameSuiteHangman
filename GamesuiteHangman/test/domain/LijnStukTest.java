@@ -6,6 +6,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import domain.exceptions.DomainException;
+import domain.vorm.LijnStuk;
+import domain.vorm.Omhullende;
+import domain.vorm.Punt;
+
 public class LijnStukTest {
 	private Punt punt1 = new Punt(10, 20);
 	private Punt zelfdeAlsPunt1 = new Punt(10, 20);

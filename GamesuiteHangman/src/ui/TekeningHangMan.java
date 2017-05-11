@@ -1,18 +1,18 @@
 package ui;
 
-import domain.Cirkel;
-import domain.LijnStuk;
-import domain.Punt;
-import domain.Rechthoek;
 import domain.Tekening;
-import domain.Vorm;
+import domain.vorm.Cirkel;
+import domain.vorm.LijnStuk;
+import domain.vorm.Punt;
+import domain.vorm.Rechthoek;
+import domain.vorm.Vorm;
 
 public class TekeningHangMan extends Tekening {
 	private int aantalZichtbaar = 4;
-	
+
 	public TekeningHangMan() {
 		super("HangMan");
-		
+
 		Vorm galgBodem = new Rechthoek(new Punt(10, 350), 300, 40);
 		Vorm galgStaaf = new LijnStuk(new Punt(160, 350), new Punt(160, 50));
 		Vorm hangbar = new LijnStuk(new Punt(160, 50), new Punt(280, 50));
@@ -31,7 +31,7 @@ public class TekeningHangMan extends Tekening {
 		Vorm armRechts = new LijnStuk(new Punt(280, 200), new Punt(330, 170));
 		Vorm handLinks = new Cirkel(new Punt(230, 170), 5);
 		Vorm handRechts = new Cirkel(new Punt(330, 170), 5);
-		
+
 		hoofd.setZichtbaar(false);
 		oogLinks.setZichtbaar(false);
 		oogRechts.setZichtbaar(false);
@@ -46,7 +46,7 @@ public class TekeningHangMan extends Tekening {
 		armRechts.setZichtbaar(false);
 		handLinks.setZichtbaar(false);
 		handRechts.setZichtbaar(false);
-		
+
 		super.voegToe(galgBodem);
 		super.voegToe(galgStaaf);
 		super.voegToe(hangbar);
@@ -66,36 +66,36 @@ public class TekeningHangMan extends Tekening {
 		super.voegToe(handLinks);
 		super.voegToe(handRechts);
 	}
-	
+
 	public int getAantalOnzichtbaar() {
 		return getAantalVormen() - aantalZichtbaar;
 	}
-	
+
 	public void zetVolgendeZichtbaar() {
-		if(alleVormenZichtbaar()) {
+		if (alleVormenZichtbaar()) {
 			throw new UiException("Alle vormen zijn al zichtbaar");
 		}
-		
+
 		getVorm(aantalZichtbaar).setZichtbaar(true);
 		aantalZichtbaar++;
 	}
-	
+
 	public boolean alleVormenZichtbaar() {
 		return aantalZichtbaar == getAantalVormen();
 	}
-	
+
 	public void reset() {
-		for(int i = 4; i < getAantalVormen(); i++) {
+		for (int i = 4; i < getAantalVormen(); i++) {
 			getVorm(i).setZichtbaar(false);
 		}
 		aantalZichtbaar = 4;
 	}
-	
+
 	@Override
 	public void voegToe(Vorm vorm) {
 		throw new UiException("Er mogen geen vormen toegevoegd worden aan de hangman tekening");
 	}
-	
+
 	@Override
 	public void verwijder(Vorm vorm) {
 		throw new UiException("Er mogen geen vormen verwijderd worden van de hangman tekening");

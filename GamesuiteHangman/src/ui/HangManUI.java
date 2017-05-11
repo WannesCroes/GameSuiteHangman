@@ -2,45 +2,28 @@ package ui;
 
 import javax.swing.JOptionPane;
 
-import domain.HintWoord;
-import domain.Speler;
-import domain.WoordenLijst;
-import domain.exceptions.DatabaseException;
+import domain.HangMan;
+import domain.speler.Speler;
+import domain.woord.WoordenLijst;
 
 public class HangManUI {
 
-	Speler speler;
-	WoordenLijst woordenlijst;
+	private final Speler speler;
+	private WoordenLijst woordenlijst;
 
 	public HangManUI(Speler speler, WoordenLijst woordenlijst) {
 		this.speler = speler;
 		this.woordenlijst = woordenlijst;
 	}
 
-	public void play() throws DatabaseException {
-		TekeningHangMan hangman = new TekeningHangMan();
-		GameHoofdScherm main = new GameHoofdScherm("hangman", hangman);
-
-		HintWoord hintwoord = new HintWoord(this.woordenlijst.getRandomWoord());
-		
-		String l;
-		boolean start = true;
-		boolean geraden = false;
-		while (hintwoord.isGeraden() == false) {
-			if (geraden || start) {
-				l = JOptionPane.showInputDialog("Super, doe zo voort! \n Rarara, welk woord zoeken we \n"
-						+ hintwoord.toString() + "\n\n Geef een letter:");
-			} else {
-				hangman.zetVolgendeZichtbaar();
-				main.teken();
-				
-				l = JOptionPane.showInputDialog("Helaas, volgende keer beter! \n Rarara, welk woord zoeken we \n"
-						+ hintwoord.toString() + "\n\n Geef een letter:");
-			}
-			
-			start = false;
-			geraden = hintwoord.raad(l.charAt(0));
-
+	public void play() {
+		try {
+			HangMan hangman = new HangMan(speler, woordenlijst);
+			HangmanPaneel paneel = new HangmanPaneel(hangman);
+			HangManHoofdScherm main = new HangManHoofdScherm(hangman, paneel);
+			main.start();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 }

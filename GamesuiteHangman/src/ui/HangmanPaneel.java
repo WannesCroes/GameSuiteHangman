@@ -13,88 +13,37 @@ import domain.HangMan;
 
 public class HangmanPaneel extends JPanel {
 
-	private static final long serialVersionUID = 1L;	
-	
-	private JTextField letter;	
+	private static final long serialVersionUID = 1L;
+
+	private JTextField letter;
 	private JLabel woord;
-	
+
 	private TekenVenster tekenVenster;
 	private HangMan spel;
-	
-	public HangmanPaneel(HangMan spel){
+
+	public HangmanPaneel(HangMan spel) {
 		super();
 		setSpel(spel);
 		init();
 	}
 
-	private void init(){
-		letter = new JTextField("",5);
+	private void init() {
+		letter = new JTextField("", 5);
 		woord = new JLabel("");
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(letter, BorderLayout.EAST);
 		this.add(woord, BorderLayout.CENTER);
-		
+
 		letter.addKeyListener(new RaadLuisteraar());
 	}
-	
+
 	private void reset() {
 		woord.setText(getSpel().getHint());
 		getTekenVenster().teken();
 	}
 	
-	public class RaadLuisteraar implements KeyListener {
-
-		@Override
-		public void keyPressed(KeyEvent arg0) {
-			if(arg0.getKeyCode()== KeyEvent.VK_ENTER){
-				String input = letter.getText();
-				char guess = '\u0000';
-				if(input.length() > 0){
-					guess = input.charAt(0);
-				}
-				
-				getSpel().raad(guess);
-
-				woord.setText(getSpel().getHint());
-				letter.setText("");
-				getTekenVenster().teken();
-				
-				if (getSpel().isGameOver()) {
-					quit("You Lost!!!", "Game Over");
-					reset();
-				}
-				
-				if (getSpel().isGewonnen()) {
-					quit("You Won!!!", "Game Over");
-					reset();
-				}
-			}
-		}
-
-		@Override
-		public void keyReleased(KeyEvent arg0) {/* Niet nodig*/}
-		@Override
-		public void keyTyped(KeyEvent arg0) {/* Niet nodig*/}
-	}
-	
-	private void quit(String message, String title) {
-		message += "\n\nWilt u opnieuw spelen?";
-		
-		String[] keuzes = {"Ja", "Nee"};
-		String keuze = (String) JOptionPane.showInputDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE, null, keuzes, null);
-		
-		if(keuze.equals("Ja")) {
-			getSpel().reset();
-			reset();
-		}
-		else {
-			System.exit(0);
-		}
-	}
-	
-	
-	private void setSpel(HangMan spel){
+	private void setSpel(HangMan spel) {
 		this.spel = spel;
 	}
 
@@ -106,9 +55,65 @@ public class HangmanPaneel extends JPanel {
 		return tekenVenster;
 	}
 
-	 public void setTekenVenster(TekenVenster tekenVenster) {
+	public void setTekenVenster(TekenVenster tekenVenster) {
 		this.tekenVenster = tekenVenster;
 
 		reset();
 	}
+
+	public class RaadLuisteraar implements KeyListener {
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+				String input = letter.getText();
+				char guess = '\u0000';
+				if (input.length() > 0) {
+					guess = input.charAt(0);
+				}
+
+				getSpel().raad(guess);
+
+				woord.setText(getSpel().getHint());
+				letter.setText("");
+				getTekenVenster().teken();
+
+				if (getSpel().isGameOver()) {
+					quit("You Lost!!!", "Game Over");
+					getSpel().getSpeler().addToScore(-1);
+					reset();
+				}
+
+				if (getSpel().isGewonnen()) {
+					quit("You Won!!!", "Game Over");
+					getSpel().getSpeler().addToScore(1);
+					reset();
+				}
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			/* Niet nodig */}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			/* Niet nodig */}
+	}
+
+	private void quit(String message, String title) {
+		message += "\n\nWilt u opnieuw spelen?";
+
+		String[] keuzes = { "Ja", "Nee" };
+		String keuze = (String) JOptionPane.showInputDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE, null,
+				keuzes, null);
+
+		if (keuze == null || keuze.equals("Nee")) {
+			System.exit(0);
+		} else {
+			getSpel().reset();
+			this.reset();
+		}
+	}
+
 }

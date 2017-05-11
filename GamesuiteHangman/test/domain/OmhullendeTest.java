@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.exceptions.DomainException;
+import domain.vorm.Omhullende;
+import domain.vorm.Punt;
+
 public class OmhullendeTest {
 
 	private Punt linkerBovenhoek;

@@ -1,15 +1,14 @@
-package domain;
+package domain.vorm;
+
+import domain.Drawable;
 
 public abstract class Vorm implements Drawable{
-	private boolean zichtbaar = true;
-	
-	public Vorm(){
-	}
+
+	public Vorm(){}
 	
 	public abstract Omhullende getOmhullende();
 	
 	public abstract boolean isZichtbaar();
-	
 	public abstract void setZichtbaar(boolean zichtbaar);
 	
 	@Override
@@ -17,4 +16,5 @@ public abstract class Vorm implements Drawable{
 	
 	@Override
 	public abstract boolean equals(Object o);
+	
 }

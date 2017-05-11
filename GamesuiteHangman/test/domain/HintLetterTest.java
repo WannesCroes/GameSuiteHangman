@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import domain.woord.HintLetter;
+
 public class HintLetterTest {
 	@Test
 	public void HintLetter_moet_HintLetter_maken_die_niet_geraden_is() {

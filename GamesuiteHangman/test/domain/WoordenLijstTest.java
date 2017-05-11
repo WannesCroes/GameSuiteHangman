@@ -1,19 +1,17 @@
 package domain;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import domain.exceptions.DatabaseException;
+import domain.exceptions.DomainException;
+import domain.woord.WoordenLijst;
 
 public class WoordenLijstTest {
 	
-	private WoordenLijst woordenlijstLeeg;
-	private WoordenLijst woordenlijstMetEenGeldigWoord;
-	private WoordenLijst woordenlijstMetGeldigeWoorden;
+	private WoordenLijst woordenlijst;
 	private ArrayList<String> geldigeWoorden;
 
 	@Before
@@ -23,51 +21,49 @@ public class WoordenLijstTest {
 		geldigeWoorden.add("game");
 		geldigeWoorden.add("hangman");
 		
-		woordenlijstLeeg = new WoordenLijst();
-		
-		woordenlijstMetEenGeldigWoord = new WoordenLijst();
-		woordenlijstMetEenGeldigWoord.voegToe(geldigeWoorden.get(0));
-		
-		woordenlijstMetGeldigeWoorden = new WoordenLijst();
-		woordenlijstMetGeldigeWoorden.voegToe(geldigeWoorden.get(0));
-		woordenlijstMetGeldigeWoorden.voegToe(geldigeWoorden.get(1));
-		woordenlijstMetGeldigeWoorden.voegToe(geldigeWoorden.get(2));
-		
+		woordenlijst = new WoordenLijst(false);
+	}
+	
+	@After
+	public void breakDown() {
+		woordenlijst.reset();
 	}
 	
 	@Test
 	public void getRandomWoord_moet_null_teruggeven_als_lijst_leeg() {
 		//WoordenLijst woordenlijstl = new WoordenLijst();
-		assertEquals(null,woordenlijstLeeg.getRandomWoord());
+		assertEquals(null, woordenlijst.getRandomWoord());
 	}
 	@Test
 	public void Als_lijst_1_woord_bevat_geeft_dat_woord_terug() {
-		ArrayList<String> lijst = new ArrayList<>();
-		lijst.add("bob");
-		assertEquals("bob", lijst.get(0));
+		woordenlijst.voegToe(geldigeWoorden.get(0));
+		assertEquals("test", woordenlijst.getRandomWoord());
 	}
 	@Test
 	public void voegToe_moet_een_woord_toevoegen() {
-		woordenlijstLeeg.voegToe(geldigeWoorden.get(0));
-		
-		assertEquals(1,woordenlijstLeeg.getAantalWoorden());
+		woordenlijst.voegToe(geldigeWoorden.get(0));
+		assertEquals("test", woordenlijst.getRandomWoord());
 	}
 	
 	@Test (expected = DomainException.class)
 	public void voegToe_moet_exception_gooien_als_gegeven_woord_null() {
-		woordenlijstLeeg.voegToe(null);
+		woordenlijst.voegToe(null);
 	}
 	
 	@Test (expected = DomainException.class)
 	public void voegToe_moet_exception_gooien_als_gegeven_woord_leeg() {
-		woordenlijstLeeg.voegToe("");
+		woordenlijst.voegToe("");
 	}
 	
 	@Test (expected = DomainException.class)
 	public void voegToe_moet_exception_gooien_als_gegeven_woord_reeds_in_lijst() {
+		woordenlijst.voegToe(geldigeWoorden.get(0));
+		woordenlijst.voegToe(geldigeWoorden.get(1));
+		woordenlijst.voegToe(geldigeWoorden.get(2));
+		
 		String woordAlInLijst = geldigeWoorden.get(2);
 
-		woordenlijstMetGeldigeWoorden.voegToe(woordAlInLijst);
+		woordenlijst.voegToe(woordAlInLijst);
 	}
 	
 }

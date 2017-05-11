@@ -5,6 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.exceptions.DomainException;
+import domain.vorm.Omhullende;
+import domain.vorm.Punt;
+import domain.vorm.Rechthoek;
+
 public class RechthoekTest {
 
 	private Punt linkerBovenhoek;

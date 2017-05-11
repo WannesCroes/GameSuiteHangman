@@ -5,6 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.exceptions.DomainException;
+import domain.vorm.Cirkel;
+import domain.vorm.Omhullende;
+import domain.vorm.Punt;
+
 public class CirkelTest {
 
 	private int radius;
@@ -27,12 +32,12 @@ public class CirkelTest {
 	
 	@Test(expected = DomainException.class)
 	public void Straal_is_0(){
-		Cirkel cirkelAnder = new Cirkel(middelpunt, 0);
+		new Cirkel(middelpunt, 0);
 	}
 	
 	@Test(expected = DomainException.class)
 	public void Middelpunt_is_null(){
-		Cirkel cirkelAnder = new Cirkel(null, radius);
+		new Cirkel(null, radius);
 	}
 	@Test
 	public void equals_moet_false_Teruggeven_als_punt_niet_gelijk_is(){

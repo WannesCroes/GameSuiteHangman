@@ -5,16 +5,8 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-
-import domain.Cirkel;
-import domain.Driehoek;
-import domain.LijnStuk;
-import domain.Punt;
-import domain.Rechthoek;
 import domain.Tekening;
-import domain.Vorm;
-
+import domain.vorm.Vorm;
 
 public class TekenVenster extends Canvas {
 
@@ -41,8 +33,8 @@ public class TekenVenster extends Canvas {
 		Graphics2D graphics2D = (Graphics2D) graphics;
 		graphics2D.setStroke(new BasicStroke(5));
 
-		for(Vorm vorm : tekening.getVormen()){
+		for (Vorm vorm : tekening.getVormen()) {
 			vorm.teken(graphics);
 		}
-		}
+	}
 }

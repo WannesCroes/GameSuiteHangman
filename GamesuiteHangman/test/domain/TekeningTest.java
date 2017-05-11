@@ -7,6 +7,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.exceptions.DomainException;
+import domain.vorm.Cirkel;
+import domain.vorm.Driehoek;
+import domain.vorm.LijnStuk;
+import domain.vorm.Punt;
+import domain.vorm.Rechthoek;
+import domain.vorm.Vorm;
+
 public class TekeningTest {
 	private Vorm gebouw;
 	private Vorm dak;

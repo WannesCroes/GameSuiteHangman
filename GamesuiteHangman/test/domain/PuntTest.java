@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.vorm.Punt;
+
 public class PuntTest {
 	
 	private int xCoordinaat;

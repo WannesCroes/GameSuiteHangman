@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import domain.exceptions.DomainException;
+import domain.woord.HintWoord;
+
 
 public class HintWoordTest {
 
