@@ -10,6 +10,7 @@ import domain.Punt;
 import domain.Rechthoek;
 import domain.Speler;
 import domain.Tekening;
+import domain.WoordenLijst;
 import domain.exceptions.*;
 
 public class Launcher {
@@ -24,7 +25,7 @@ public class Launcher {
 			Tekening tekening = createTekening();
 			String input = "1";
 			while (!input.equals("0")) {
-				input = showJOptionInputDialog("Wat wil je doen: \n\n 1.Vorm maken \n 2.Tekening tonen \n\n 0.Stoppen",
+				input = showJOptionInputDialog("Wat wil je doen: \n\n 1.Vorm maken \n 2.Tekening tonen \n 3.HangMan \n\n 0.Stoppen",
 						"menu").trim();
 				if (input.equals("1")) {
 					String[] shapes = { "Cirkel", "Rechthoek", "LijnStuk", "Driehoek" };
@@ -77,6 +78,9 @@ public class Launcher {
 					view.setVisible(true);
 					view.teken();
 					JOptionPane.showMessageDialog(null, tekening.toString());
+				} else if (input.equals("3")){
+					HangManUI view = new HangManUI(speler, new WoordenLijst());
+					view.play();
 				}
 			}
 		} catch (CancelledException e) {
