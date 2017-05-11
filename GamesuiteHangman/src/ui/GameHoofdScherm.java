@@ -30,6 +30,7 @@ public class GameHoofdScherm extends JFrame{
 		this.pack();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tekenvenster.paint(getGraphics());
 	}
 	
 	public void teken(){

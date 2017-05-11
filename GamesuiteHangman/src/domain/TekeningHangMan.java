@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class TekeningHangMan extends Tekening {
 
-	private LinkedList<Vorm> hangman = new LinkedList<>();
+	
 	
 	public TekeningHangMan(String naam) {
 		super(naam);
@@ -12,7 +12,7 @@ public class TekeningHangMan extends Tekening {
 	}
 	
 	private void voegVormenToe(){
-		Vorm galgBodem = new Rechthoek(new Punt(10, 350), 300, 40);// altijd zichtbaar
+		voegToe(new Rechthoek(new Punt(10, 350), 300, 40));// altijd zichtbaar
 		Vorm galgStaaf = new LijnStuk(new Punt(160, 350), new Punt(160, 50));// altijd zichtbaar
 		Vorm hangbar = new LijnStuk(new Punt(160, 50), new Punt(280, 50));// altijd zichtbaar
 		Vorm koord = new LijnStuk(new Punt(280, 50), new Punt(280, 100));// altijd zichtbaar
