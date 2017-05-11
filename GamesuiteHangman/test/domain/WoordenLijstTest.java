@@ -36,35 +36,35 @@ public class WoordenLijstTest {
 	}
 	
 	@Test
-	public void getRandomWoord_moet_null_teruggeven_als_lijst_leeg() throws DatabaseException {
+	public void getRandomWoord_moet_null_teruggeven_als_lijst_leeg() {
 		//WoordenLijst woordenlijstl = new WoordenLijst();
 		assertEquals(null,woordenlijstLeeg.getRandomWoord());
 	}
 	@Test
-	public void Als_lijst_1_woord_bevat_geeft_dat_woord_terug() throws DatabaseException {
+	public void Als_lijst_1_woord_bevat_geeft_dat_woord_terug() {
 		ArrayList<String> lijst = new ArrayList<>();
 		lijst.add("bob");
 		assertEquals("bob", lijst.get(0));
 	}
 	@Test
-	public void voegToe_moet_een_woord_toevoegen() throws DatabaseException {
+	public void voegToe_moet_een_woord_toevoegen() {
 		woordenlijstLeeg.voegToe(geldigeWoorden.get(0));
 		
 		assertEquals(1,woordenlijstLeeg.getAantalWoorden());
 	}
 	
 	@Test (expected = DomainException.class)
-	public void voegToe_moet_exception_gooien_als_gegeven_woord_null() throws DatabaseException  {
+	public void voegToe_moet_exception_gooien_als_gegeven_woord_null() {
 		woordenlijstLeeg.voegToe(null);
 	}
 	
 	@Test (expected = DomainException.class)
-	public void voegToe_moet_exception_gooien_als_gegeven_woord_leeg() throws DatabaseException {
+	public void voegToe_moet_exception_gooien_als_gegeven_woord_leeg() {
 		woordenlijstLeeg.voegToe("");
 	}
 	
 	@Test (expected = DomainException.class)
-	public void voegToe_moet_exception_gooien_als_gegeven_woord_reeds_in_lijst() throws DatabaseException {
+	public void voegToe_moet_exception_gooien_als_gegeven_woord_reeds_in_lijst() {
 		String woordAlInLijst = geldigeWoorden.get(2);
 
 		woordenlijstMetGeldigeWoorden.voegToe(woordAlInLijst);

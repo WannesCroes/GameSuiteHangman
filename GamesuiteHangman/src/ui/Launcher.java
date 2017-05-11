@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import domain.Cirkel;
 import domain.DomainException;
 import domain.Driehoek;
+import domain.HangMan;
 import domain.LijnStuk;
 import domain.Punt;
 import domain.Rechthoek;
@@ -30,8 +31,9 @@ public class Launcher {
 				PictionaryUI ui = new PictionaryUI(speler);
 				ui.showMenu();
 			} else {
-				HangManUI ui = new HangManUI(speler, new WoordenLijst());
-				ui.play();
+				WoordenLijst woordenlijst = new WoordenLijst();
+				HangmanPaneel paneel = new HangmanPaneel(new HangMan(speler.getNaam(), woordenlijst));
+				paneel.setVisible(true);
 			}
 		} catch (CancelledException e) {
 			return;
