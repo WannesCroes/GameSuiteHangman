@@ -63,7 +63,8 @@ public class LijnStuk extends Vorm {
 			return false;
 		} else {
 			LijnStuk s = (LijnStuk) o;
-			return (this.start.equals(s.start) && this.eind.equals(s.eind));
+			return (this.start.equals(s.start) && this.eind.equals(s.eind) ||
+					this.start.equals(s.eind) && this.eind.equals(s.start));
 		}
 	}
 
