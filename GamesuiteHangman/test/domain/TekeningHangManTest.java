@@ -9,7 +9,6 @@ import org.junit.Test;
 import domain.vorm.Punt;
 import domain.vorm.Rechthoek;
 import domain.vorm.Vorm;
-import ui.TekeningHangMan;
 import ui.UiException;
 
 public class TekeningHangManTest {

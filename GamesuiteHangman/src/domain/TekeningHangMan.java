@@ -1,11 +1,11 @@
-package ui;
+package domain;
 
-import domain.Tekening;
 import domain.vorm.Cirkel;
 import domain.vorm.LijnStuk;
 import domain.vorm.Punt;
 import domain.vorm.Rechthoek;
 import domain.vorm.Vorm;
+import ui.UiException;
 
 public class TekeningHangMan extends Tekening {
 	private int aantalZichtbaar = 4;

@@ -4,7 +4,6 @@ import domain.exceptions.DomainException;
 import domain.speler.Speler;
 import domain.woord.HintWoord;
 import domain.woord.WoordenLijst;
-import ui.TekeningHangMan;
 
 public class HangMan {
 
