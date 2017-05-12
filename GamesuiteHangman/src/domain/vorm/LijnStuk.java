@@ -7,7 +7,6 @@ public class LijnStuk extends Vorm {
 
 	private Punt start;
 	private Punt eind;
-	private boolean zichtbaar = true;
 
 	/**
 	 * Constructor voor een lijnstuk
@@ -57,16 +56,6 @@ public class LijnStuk extends Vorm {
 	}
 
 	@Override
-	public boolean isZichtbaar() {
-		return this.zichtbaar;
-	}
-
-	@Override
-	public void setZichtbaar(boolean zichtbaar) {
-		this.zichtbaar = zichtbaar;
-	}
-
-	@Override
 	public boolean equals(Object o) {
 		if (o == this) {
 			return true;
@@ -81,7 +70,7 @@ public class LijnStuk extends Vorm {
 	@Override
 	public String toString() {
 		String output = "Lijn: startpunt: " + start.toString() + " - eindpunt: " + eind.toString() + "\n"
-				+ "Omhullende: " + this.getOmhullende().toString();
+				+ super.toString();
 		return output;
 	}
 

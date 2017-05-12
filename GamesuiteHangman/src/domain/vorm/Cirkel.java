@@ -6,7 +6,6 @@ import domain.exceptions.DomainException;
 public class Cirkel extends Vorm {
 	private int radius;
 	private Punt middelpunt;
-	private boolean zichtbaar = true;
 
 	/**
 	 * Constructor voor een cirkel
@@ -54,15 +53,7 @@ public class Cirkel extends Vorm {
 		return omhullende;
 	}
 
-	@Override
-	public boolean isZichtbaar() {
-		return this.zichtbaar;
-	}
-
-	@Override
-	public void setZichtbaar(boolean zichtbaar) {
-		this.zichtbaar = zichtbaar;
-	}
+	
 
 	@Override
 	public void teken(Graphics graphics) {
@@ -89,7 +80,6 @@ public class Cirkel extends Vorm {
 
 	@Override
 	public String toString() {
-		return "Cirkel: Middelpunt: " + this.getMiddelpunt() + " - straal: " + this.getRadius() + "\n" + "Omhullende: "
-				+ this.getOmhullende().toString();
+		return "Cirkel: Middelpunt: " + this.getMiddelpunt() + " - straal: " + this.getRadius() + "\n" + super.toString();
 	}
 }

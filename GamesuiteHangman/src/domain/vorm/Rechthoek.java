@@ -8,7 +8,6 @@ public class Rechthoek extends Vorm {
 	private int breedte;
 	private int hoogte;
 	private Punt linkerBovenHoek;
-	private boolean zichtbaar = true;
 
 	/**
 	 * Constructor voor een rechthoek
@@ -77,20 +76,9 @@ public class Rechthoek extends Vorm {
 	}
 
 	@Override
-	public boolean isZichtbaar() {
-		return this.zichtbaar;
-	}
-
-	@Override
-	public void setZichtbaar(boolean zichtbaar) {
-		this.zichtbaar = zichtbaar;
-	}
-
-	@Override
 	public String toString() {
 		return "Rechthoek: positie: (" + this.linkerBovenHoek.getX() + ", " + this.linkerBovenHoek.getY()
-				+ ") - breedte: " + this.getBreedte() + " - hoogte: " + this.getHoogte() + "\n" + "Omhullende: "
-				+ this.getOmhullende().toString();
+				+ ") - breedte: " + this.getBreedte() + " - hoogte: " + this.getHoogte() + "\n" + super.toString();
 	}
 
 	@Override

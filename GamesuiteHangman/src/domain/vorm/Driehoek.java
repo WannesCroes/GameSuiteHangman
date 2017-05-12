@@ -9,7 +9,6 @@ public class Driehoek extends Vorm {
 	private Punt punt1;
 	private Punt punt2;
 	private Punt punt3;
-	private boolean zichtbaar = true;
 
 	/**
 	 * Constructor voor een driehoek
@@ -73,15 +72,7 @@ public class Driehoek extends Vorm {
 		return omhullende;
 	}
 
-	@Override
-	public boolean isZichtbaar() {
-		return this.zichtbaar;
-	}
-
-	@Override
-	public void setZichtbaar(boolean zichtbaar) {
-		this.zichtbaar = zichtbaar;
-	}
+	
 
 	@Override
 	public void teken(Graphics graphics) {
@@ -126,7 +117,7 @@ public class Driehoek extends Vorm {
 	public String toString() {
 		return "Driehoek: hoekpunt1: " + this.getHoekPunt1().toString() + " - hoekpunt2: "
 				+ this.getHoekPunt2().toString() + " - hoekpunt3: " + this.getHoekPunt3().toString() + "\n"
-				+ "Omhullende: " + this.getOmhullende().toString();
+				+ super.toString();
 	}
 
 }

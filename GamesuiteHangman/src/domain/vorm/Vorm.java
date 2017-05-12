@@ -1,20 +1,24 @@
 package domain.vorm;
 
-import domain.Drawable;
+public abstract class Vorm implements Drawable {
+	private boolean zichtbaar;
 
-public abstract class Vorm implements Drawable{
+	public Vorm() {
+		this.setZichtbaar(true);
+	}
 
-	public Vorm(){}
-	
 	public abstract Omhullende getOmhullende();
+
+	public boolean isZichtbaar() {
+		return this.zichtbaar;
+	}
+
+	public void setZichtbaar(boolean zichtbaar) {
+		this.zichtbaar = zichtbaar;
+	}
 	
-	public abstract boolean isZichtbaar();
-	public abstract void setZichtbaar(boolean zichtbaar);
-	
-	@Override
-	public abstract String toString();
-	
-	@Override
-	public abstract boolean equals(Object o);
-	
+	public String toString(){
+		return  "Omhullende: " + this.getOmhullende().toString();
+	}
+
 }

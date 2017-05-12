@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import domain.Tekening;
-import domain.vorm.Vorm;
 
 public class TekenVenster extends Canvas {
 
@@ -33,8 +32,6 @@ public class TekenVenster extends Canvas {
 		Graphics2D graphics2D = (Graphics2D) graphics;
 		graphics2D.setStroke(new BasicStroke(5));
 
-		for (Vorm vorm : tekening.getVormen()) {
-			vorm.teken(graphics);
-		}
+		tekening.teken(graphics2D);
 	}
 }

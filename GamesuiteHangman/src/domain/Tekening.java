@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import domain.exceptions.DomainException;
+import domain.vorm.Drawable;
 import domain.vorm.Vorm;
 
 public class Tekening implements Drawable {
@@ -43,14 +44,6 @@ public class Tekening implements Drawable {
 		return vormen.get(index);
 	}
 
-	public LinkedList<Vorm> getVormen() {
-		return this.vormen;
-	}
-
-	public void setVormen(LinkedList<Vorm> vormen) {
-		this.vormen = vormen;
-	}
-
 	public int getAantalVormen() {
 		return vormen.size();
 	}
@@ -60,15 +53,13 @@ public class Tekening implements Drawable {
 	}
 
 	public boolean bevat(Vorm vorm) {
-		for (Vorm v : vormen) {
-			if (vorm.equals(v))
-				return true;
-		}
-		return false;
+		return vormen.contains(vorm);
 	}
 
 	public void voegToe(Vorm vorm) {
-		if (vorm.getOmhullende().getMinimaleX() < MIN_X) {
+		if (vorm.getOmhullende().getMinimaleX() < MIN_X || vorm.getOmhullende().getMaximaleX() > MAX_X
+				|| vorm.getOmhullende().getMinimaleY() < MIN_Y ||  vorm.getOmhullende().getMaximaleY() > MAX_Y ) {
+			
 			throw new DomainException("Vorm valt buiten de tekening.");
 		}
 
@@ -104,12 +95,12 @@ public class Tekening implements Drawable {
 		} else {
 			Tekening tekening = (Tekening) o;
 
-			if (tekening.getVormen().size() != this.vormen.size()) {
+			if (tekening.vormen.size() != this.vormen.size()) {
 				return false;
 			}
 
 			ArrayList<Vorm> duplicate = new ArrayList<>();
-			duplicate.addAll(tekening.getVormen());
+			duplicate.addAll(tekening.vormen);
 			for (Vorm vorm : vormen) {
 				if (!duplicate.contains(vorm)) {
 					return false;

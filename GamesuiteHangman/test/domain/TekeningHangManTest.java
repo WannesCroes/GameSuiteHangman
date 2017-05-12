@@ -41,7 +41,7 @@ public class TekeningHangManTest {
 		TekeningHangMan tekening = new TekeningHangMan();
 		boolean condition = true;
 		for(int i = 4; i < 18 ; i++){
-			condition &= !(tekening.getVormen().get(i).isZichtbaar());
+			condition &= !(tekening.getVorm(i).isZichtbaar());
 		}
 		Assert.assertTrue(condition);
 	}
