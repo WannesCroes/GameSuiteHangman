@@ -69,7 +69,7 @@ public class Tekening implements Drawable {
 	@Override
 	public void teken(Graphics graphics) {
 		Graphics2D graphics2D = (Graphics2D) graphics;
-		graphics2D.setStroke(new BasicStroke(5));
+		graphics2D.setStroke(new BasicStroke(2));
 
 		for (Vorm vorm : vormen) {
 			vorm.teken(graphics);

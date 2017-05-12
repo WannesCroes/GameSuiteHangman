@@ -79,14 +79,16 @@ public class HangmanPaneel extends JPanel {
 				getTekenVenster().teken();
 
 				if (getSpel().isGameOver()) {
+					if(getSpel().getSpeler().getScore() > 0){
+						getSpel().getSpeler().addToScore(-1);
+					}
 					quit("You Lost!!!", "Game Over");
-					getSpel().getSpeler().addToScore(-1);
 					reset();
 				}
 
 				if (getSpel().isGewonnen()) {
-					quit("You Won!!!", "Game Over");
 					getSpel().getSpeler().addToScore(1);
+					quit("You Won!!!", "Game Over");
 					reset();
 				}
 			}
@@ -102,7 +104,8 @@ public class HangmanPaneel extends JPanel {
 	}
 
 	private void quit(String message, String title) {
-		message += "\n\nWilt u opnieuw spelen?";
+		message += "\n\n" + getSpel().getSpeler().getNaam() +", uw score is: " + getSpel().getSpeler().getScore()
+				+ "\n \nWilt u opnieuw spelen?";
 
 		String[] keuzes = { "Ja", "Nee" };
 		String keuze = (String) JOptionPane.showInputDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE, null,
