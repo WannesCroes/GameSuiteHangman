@@ -65,5 +65,12 @@ public class WoordenLijstTest {
 
 		woordenlijst.voegToe(woordAlInLijst);
 	}
+	@Test
+	public void getRandomWoord_geeft_random_woord(){
+		woordenlijst.voegToe(geldigeWoorden.get(0));
+		woordenlijst.voegToe(geldigeWoorden.get(1));
+		woordenlijst.voegToe(geldigeWoorden.get(2));
 	
+		assertNotNull(woordenlijst.getRandomWoord());
+	}	
 }
