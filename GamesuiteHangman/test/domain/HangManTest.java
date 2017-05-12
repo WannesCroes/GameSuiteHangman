@@ -40,7 +40,7 @@ public class HangManTest {
 	
 	@Test (expected = DomainException.class)
 	public void HangMan_moet_een_exception_gooien_als_gegeven_woordenlijst_null() {
-		hangman = new HangMan(geldigeSpeler, null);
+		new HangMan(geldigeSpeler, null);
 	}
 	
 	@Test (expected = DomainException.class)

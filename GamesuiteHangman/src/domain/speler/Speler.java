@@ -47,7 +47,7 @@ public class Speler {
 			return false;
 		} else {
 			Speler s = (Speler) o;
-			return (this.naam == s.naam && this.score == s.score);
+			return (this.naam.equals(s.naam) && this.score == s.score);
 		}
 	}
 
